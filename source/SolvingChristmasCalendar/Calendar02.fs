@@ -14,18 +14,45 @@
 let getPrimes = 
     [|11;13;17;19;23;29;31;37;41;43;47;53;59;61;67;71;73;79;83;89;97|]
 
-//TODO: Improve
+let startsWith numberToStartWith number =
+    let sNumber = sprintf "%i" number
+    let sNumberToStartWith = sprintf "%i" numberToStartWith
+    sNumber.StartsWith sNumberToStartWith  
 
-let getNumber = 
-    //97
-    // 71
-    //  11
-    //   13
-    //    31
-    //     17
-    //      73
-    //       37
-    971131737
+let findLowestStartingWith array numberToStartWith = 
+    array |> Array.filter (startsWith numberToStartWith) |> Array.min
+
+let pickNext startWithNumber numbers =
+    let n = findLowestStartingWith numbers startWithNumber
+    let numbers' = numbers |> Array.filter (fun x -> x <> n)
+
+    let s = sprintf "%i" n
+    let s2 = s.Substring(1)
+    let i2 = System.Convert.ToInt32(s2)
+    (n, i2, numbers')
+    
+//let getNumber = 
+//    //97
+//    // 71
+//    //  11
+//    //   13
+//    //    31
+//    //     17
+//    //      73
+//    //       37
+//    971131737
 
 let getSolution = 
-    sprintf "%i" getNumber
+    let i1 = 9
+    let a = getPrimes
+    let (n2, i2, a2) = pickNext i1 a
+    let (_, i3, a3) = pickNext i2 a2
+    let (_, i4, a4) = pickNext i3 a3
+    let (_, i5, a5) = pickNext i4 a4
+    let (_, i6, a6) = pickNext i5 a5
+    let (_, i7, a7) = pickNext i6 a6
+    let (_, i8, a8) = pickNext i7 a7
+    let (_, i9, _) = pickNext i8 a8
+    
+    let s = sprintf "%i%i%i%i%i%i%i%i%i" i1 i2 i3 i4 i5 i6 i7 i8 i9
+    s
