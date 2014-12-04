@@ -10,6 +10,7 @@
 //    Det er det laveste mulige tallet som oppfyller alle disse egenskapene.
 //Hva er m dersom n = 9?
 
+//CORRECT: 971131737
 
 let getPrimes = 
     [|11;13;17;19;23;29;31;37;41;43;47;53;59;61;67;71;73;79;83;89;97|]

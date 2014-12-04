@@ -2,15 +2,13 @@
 
 //PROBLEM
 //Tenk deg et rutenett med 10x10 ruter, som kan være hvite eller sorte. Koordinatene telles fra 0, så vi har koordinater 0-9 langs X og Y-aksene. Alle rutene har et nummer, som er definert som X*10+Y. Så rute (5,7) har nummer 57, og rute (9,9) har nummer 99.
-
 //I begynnelsen er alle rutene hvite. I posisjon (0,0) står en sjakk-springer (også kjent som hest).
-
 //Brikken flytter etter følgende regler hver runde:
-
 //    Undersøk rutene springeren kan flytte til (etter vanlige sjakk-regler uten å forlate rutenettet). Flytt til den av disse rutene som har lavest nummer og som har samme farge som ruten springeren står på. Hvis ingen av disse rutene har samme farge, flytt til den ruten som har høyest nummer.
 //    Etter at springeren har flyttet, skift farge på ruten som springeren nettopp forlot.
-
 //Hvor mange av rutene er sorte når springeren har flyttet 200 ganger? (Ja, fargen på ruten springeren forlot den siste gangen skal skiftes før du teller.)
+
+//CORRECT: 32
 
 let possibleMoves x y : (int*int) list= 
     let p0 = (x+2, y+1)
