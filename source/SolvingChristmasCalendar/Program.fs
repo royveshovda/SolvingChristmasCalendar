@@ -7,8 +7,8 @@ let main argv =
     //printfn "Luke  2:  %s" Calendar02.getSolution
     //printfn "Luke  3:  %s" Calendar03.getSolution
     //printfn "Luke  4:  %s" Calendar04.getSolution
-    printfn "Luke  5:  %s" Calendar05.getSolution
-    //printfn "Luke  6:  %s" Calendar06.getSolution
+    //printfn "Luke  5:  %s" Calendar05.getSolution
+    printfn "Luke  6:  %s" Calendar06.getSolution
     //printfn "Luke  7:  %s" Calendar07.getSolution
     //printfn "Luke  8:  %s" Calendar08.getSolution
     //printfn "Luke  9:  %s" Calendar09.getSolution
