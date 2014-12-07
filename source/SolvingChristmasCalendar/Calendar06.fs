@@ -39,7 +39,7 @@
 let getOneArray limit factor =
     [|1 .. limit|] |> Array.map (fun x -> x * factor)
 
-//TODO: Fix
+//TODO: Fix. This is much too slow
 let getAllArrays limit =
     let d1 = [|1 .. limit|]
     let d2 = d1 |> Array.map (getOneArray limit)
