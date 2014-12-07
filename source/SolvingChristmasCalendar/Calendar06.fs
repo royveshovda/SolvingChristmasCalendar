@@ -37,15 +37,17 @@
 
 
 let getOneArray limit factor =
-    [|1 .. limit|] |> Array.map (fun x -> x * factor)
+    [1 .. limit] |> List.map (fun x -> x * factor)
 
 //TODO: Fix. This is much too slow
 let getAllArrays limit =
-    let d1 = [|1 .. limit|]
-    let d2 = d1 |> Array.map (getOneArray limit)
-    let d3 = Array.fold (fun acc x -> Array.append acc x) [||] d2
-    let d4 = d3 |> Array.toSeq
+    let d1 = [1 .. limit]
+    let d2 = d1 |> List.map (getOneArray limit)
+    let d3 = d2 |> List.fold (fun acc x -> acc@x) []
+    let d4 = d3 |> List.toSeq
     let d5 = d4 |> Seq.distinct
+    let d6 = d5 |> Seq.toList
+    let l1 = d6.Length
     Seq.length d5
 
 let getSolution =
