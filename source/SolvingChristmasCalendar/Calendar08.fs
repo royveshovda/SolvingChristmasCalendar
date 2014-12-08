@@ -5,6 +5,7 @@
 //Med ordentlig divisor menes det alle positive divisorer for tallet, ekskludert tallet selv. For eksempel er 6 sine ordentlige divisorer 1, 2 og 3, men altså ikke 6 (selv om det er en divisor for 6).
 //Et eksempel på et tall med denne egenskapen er 6, da 1 + 2 + 3 = 6.
 //Hvilke positive tall under 10 000 tilfredsstiller denne egenskapen? Svaret skal være i form av en kommaseparert liste, i stigende rekkefølge. Eksempelvis: 1, 2, 3
+//TIPS: Også kalt "Perfect number"
 
 //CORRECT: 6,28,496,8128
 
