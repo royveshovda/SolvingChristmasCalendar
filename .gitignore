@@ -182,3 +182,6 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 source/Data/Thumbs.db
+
+#Mono generated files
+*.exe
