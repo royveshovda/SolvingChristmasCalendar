@@ -35,6 +35,12 @@
 //var dN = numbers.Distinct();
 //int length = dN.ToList().Count;
 
+let combineAll n xs = 
+    xs |> List.map (fun x -> n * x)
+
+let allCombinations xs ys =
+    xs |> List.fold (fun acc x -> (combineAll x ys) @ acc) []
+
 let union left right =
     List.append left right |> Seq.distinct |> List.ofSeq
 
@@ -44,15 +50,13 @@ let getOneArray limit factor =
 //TODO: Fix. This is much too slow
 let getAllArrays limit =
     let d1 = [1 .. limit]
-    let d2 = d1 |> List.map (getOneArray limit)
-    let d3 = d2 |> List.fold (fun acc x -> union acc x) []
-    //let d4 = d3 |> List.toSeq
-    //let d5 = d4 |> Seq.distinct
-    //let d6 = d5 |> Seq.toList
-    //let l1 = d6.Length
-    //Seq.length d5
-    d3.Length
+    let d2 = allCombinations d1 d1
+    let d4 = d2 |> List.toSeq
+    let d5 = d4 |> Seq.distinct
+    Seq.length d5
+    //d3.Length
 
 let getSolution =
     let d1 = getAllArrays 8000
+
     sprintf "%A" d1
