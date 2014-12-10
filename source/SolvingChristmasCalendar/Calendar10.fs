@@ -13,8 +13,73 @@
 //Dette fortsetter til det bare er en person igjen. Hvilken person sitter igjen ved julebordets slutt?
 //Svaret skal være i form av nummeret på personen som sitter igjen, eksempelvis 1337
 
+//CORRECT: 953
 
-//Person: Number; Next Number
+//C#
+//private static bool Kill(Drinker worker, Drinker lastCandidate)
+//{
+//    if (lastCandidate.Id == worker.Id)
+//    {
+//        return false;
+//    }
+//    else
+//    {
+//        if (worker.Alive)
+//        {
+//            worker.Kill();
+//            return true;
+//        }
+//        else
+//        {
+//            return Kill(worker.Next, lastCandidate);
+//        }
+//    }
+//
+//}
+
+//static void Main(string[] args)
+//{
+//    const int limit = 1500;
+//    var first = new Drinker(1);
+//    var previous = first;
+//    for (var i = 2; i <= limit; i++)
+//    {
+//        var drinker = new Drinker(i);
+//        previous.SetNext(drinker);
+//        previous = drinker;
+//        if (i == limit)
+//        {
+//            drinker.SetNext(first);
+//        }
+//    }
+
+//    bool alive = true;
+
+//    Drinker worker = first;
+//    Drinker last = first;
+//    while (alive)
+//    {
+//        if (worker.Alive)
+//        {
+//            last = worker;
+//            if (!Kill(worker.Next, worker))
+//            {
+//                alive = false;
+//                break;
+//            }
+//            else
+//            {
+//                worker = worker.Next;
+//            }
+//        }
+//        else
+//        {
+//            worker = worker.Next;
+//        }
+//    }
+//    Console.WriteLine(last.Id);
+//    Console.ReadKey();
+//}
 
 let nextToken (token: int) (listSize: int) =
     match token with
