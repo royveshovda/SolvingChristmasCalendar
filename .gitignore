@@ -185,3 +185,6 @@ source/Data/Thumbs.db
 
 #Mono generated files
 *.exe
+
+# Mac desktop service store files
+.DS_Store

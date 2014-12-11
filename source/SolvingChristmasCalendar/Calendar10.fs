@@ -14,101 +14,23 @@
 //Svaret skal være i form av nummeret på personen som sitter igjen, eksempelvis 1337
 
 //CORRECT: 953
-//RUNTIME: ??
+//RUNTIME: 1ms
 
-//C#
-//private static bool Kill(Drinker worker, Drinker lastCandidate)
-//{
-//    if (lastCandidate.Id == worker.Id)
-//    {
-//        return false;
-//    }
-//    else
-//    {
-//        if (worker.Alive)
-//        {
-//            worker.Kill();
-//            return true;
-//        }
-//        else
-//        {
-//            return Kill(worker.Next, lastCandidate);
-//        }
-//    }
-//
-//}
+let lastManStanding n =
+    let people = Array.init (n) (fun i -> i+1)
+    people.[(n - 1)] <- 1
+    let rec lastManStandingImpl index = 
+        let nextIndex = people.[index]
+        let nextNextIndex = people.[nextIndex]
+        match nextNextIndex with
+        | 0 -> (index - 1)
+        | _ -> people.[index] <- nextNextIndex
+               people.[nextIndex] <- 0
+               lastManStandingImpl nextNextIndex
+    lastManStandingImpl 0
 
-//static void Main(string[] args)
-//{
-//    const int limit = 1500;
-//    var first = new Drinker(1);
-//    var previous = first;
-//    for (var i = 2; i <= limit; i++)
-//    {
-//        var drinker = new Drinker(i);
-//        previous.SetNext(drinker);
-//        previous = drinker;
-//        if (i == limit)
-//        {
-//            drinker.SetNext(first);
-//        }
-//    }
-
-//    bool alive = true;
-
-//    Drinker worker = first;
-//    Drinker last = first;
-//    while (alive)
-//    {
-//        if (worker.Alive)
-//        {
-//            last = worker;
-//            if (!Kill(worker.Next, worker))
-//            {
-//                alive = false;
-//                break;
-//            }
-//            else
-//            {
-//                worker = worker.Next;
-//            }
-//        }
-//        else
-//        {
-//            worker = worker.Next;
-//        }
-//    }
-//    Console.WriteLine(last.Id);
-//    Console.ReadKey();
-//}
-
-let nextToken (token: int) (listSize: int) =
-    match token with
-    | x when x = listSize -> 1
-    | _ -> token + 1
-
-let rec getNextValidToken (l: bool list) token =
-    let size = l.Length
-    let candidateToken = nextToken token size
-    let candidate = l.[candidateToken]
-    match candidate with
-    | true -> token
-    | false -> getNextValidToken l (token + 1)
-
-//let rec passToken l token =
-//    let next = getNextValidToken l token
-//    match next with
-//    | token -> token
-//    | _ ->
-//        l.[token] <- false
-//        let nextJump = getNextValidToken l next
-//        match next with
-//        | token -> token
-//        | _ -> passToken l nextJump       
-        
 let getSolution =
-
-//    let mutable list = List.init 1500 (fun _ -> true)
-//    let survivor = passToken list 1
-//    sprintf "%i" survivor
-    "Not implemented yet"
+    let stopWatch = System.Diagnostics.Stopwatch.StartNew()
+    let survivor = lastManStanding 1500
+    stopWatch.Stop()
+    sprintf "%i (%ims)" survivor stopWatch.ElapsedMilliseconds

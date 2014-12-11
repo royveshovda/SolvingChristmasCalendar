@@ -16,11 +16,11 @@
 //Hvor mange unike produkt finnes det i en 8000 x 8000 tabell?
 
 //CORRECT: 14509549
-//RUNTIME: 22300ms (TOO LONG)
+//RUNTIME: 10850ms (A BIT TOO LONG)
 
 let intSeq limit =
     seq { for a in 1 .. limit do
-            for b in 1 .. limit do
+            for b in a .. limit do
             yield (a * b) };;
 
 let getAllArrays limit =

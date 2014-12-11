@@ -11,6 +11,7 @@
 let getSolution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let filename = "..\\..\\..\\Data\\Santa.png"
+    //let filename = "/Users/royveshovda/src/SolvingChristmasCalendar/source/Data/Santa.png"
     // get the image
     let bitmap = new System.Drawing.Bitmap(filename)
 

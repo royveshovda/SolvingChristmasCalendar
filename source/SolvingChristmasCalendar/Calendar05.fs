@@ -9,7 +9,7 @@
 //Julegavetips: Gitt definisjonen av STORETALL ender vi da opp med (9! =) 362880 forskjellige tall.
 
 //CORRECT: 7
-//RUNTIME: ??
+//RUNTIME: 180000ms (TOO SLOW)
 
 let rec insert left x right = seq {
     match right with

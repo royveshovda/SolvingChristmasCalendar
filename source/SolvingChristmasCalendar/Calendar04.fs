@@ -7,14 +7,16 @@
 //Julegavetips: Det er i kolonnen med overskriften TAN dere finner den laveste målte temperaturen for et døgn.
 
 //CORRECT: 14.12.1981
-//RUNTIME: ??
+//RUNTIME: 210ms
 
 open System
 open System.IO
+open System.Globalization
 
 let parseLine (line:string) =
     let splits = line.Split(' ') |> Seq.filter (fun elem -> elem.Length > 0) |> Seq.toArray
-    let date = DateTime.Parse splits.[1]
+    let date = DateTime.ParseExact(splits.[1], "dd.MM.yyyy", CultureInfo.InvariantCulture)
+     
     let value = splits.[3]
     let fValue = Double.Parse value
     (date,fValue)
@@ -36,7 +38,8 @@ let readFile (filename:string)=
 
 let getSolution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
-    let filename = "..\\..\\..\\Data\\kilma_data_blindern.txt"
+    //let filename = "..\\..\\..\\Data\\kilma_data_blindern.txt"
+    let filename = "/Users/royveshovda/src/SolvingChristmasCalendar/source/Data/kilma_data_blindern.txt"
     let (date, temp) = readFile filename
     stopWatch.Stop()
-    sprintf "%s (%.1f) (%i ms)" (date.ToShortDateString()) temp stopWatch.ElapsedMilliseconds
+    sprintf "%s (%.1f) (%i ms)" (date.ToString("dd.MM.yyyy")) temp stopWatch.ElapsedMilliseconds
