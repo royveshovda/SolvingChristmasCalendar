@@ -14,6 +14,7 @@
 //Svaret skal være i form av nummeret på personen som sitter igjen, eksempelvis 1337
 
 //CORRECT: 953
+//RUNTIME: ??
 
 //C#
 //private static bool Kill(Drinker worker, Drinker lastCandidate)

@@ -11,6 +11,7 @@
 //Hva er m dersom n = 9?
 
 //CORRECT: 971131737
+//RUNTIME: 1ms
 
 let getPrimes = 
     [|11;13;17;19;23;29;31;37;41;43;47;53;59;61;67;71;73;79;83;89;97|]
@@ -44,6 +45,7 @@ let pickNext startWithNumber numbers =
 //    971131737
 
 let getSolution = 
+    let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let i1 = 9
     let a = getPrimes
     let (n2, i2, a2) = pickNext i1 a
@@ -54,6 +56,5 @@ let getSolution =
     let (_, i7, a7) = pickNext i6 a6
     let (_, i8, a8) = pickNext i7 a7
     let (_, i9, _) = pickNext i8 a8
-    
-    let s = sprintf "%i%i%i%i%i%i%i%i%i" i1 i2 i3 i4 i5 i6 i7 i8 i9
-    s
+    stopWatch.Stop()
+    sprintf "%i%i%i%i%i%i%i%i%i (%i ms)" i1 i2 i3 i4 i5 i6 i7 i8 i9 (stopWatch.ElapsedMilliseconds)

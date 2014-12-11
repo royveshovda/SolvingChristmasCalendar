@@ -15,6 +15,7 @@
 //Hva er N?
 
 //CORRECT: 7830239
+//RUNTIME: 300ms
 
 let get_primes limit =
     let table = Array.create limit true
@@ -58,6 +59,7 @@ let intersection set1 set2 set3 set4 =
   Set.intersect set1 set2 |> Set.intersect set3 |> Set.intersect set4
 
 let getSolution =
+    let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let limit = 10000000
     let primes = get_primes limit
     let s541 = get_candidates_of_length_below_limit 541 primes limit 10000
@@ -66,4 +68,5 @@ let getSolution =
     let s17 = get_candidates_of_length_below_limit 17 primes limit min541
     let s7 = get_candidates_of_length_below_limit 7 primes limit min541
     let value = (intersection s541 s41 s17 s7) |> Set.toList |> List.min
-    sprintf "%i" value
+    stopWatch.Stop()
+    sprintf "%i (%i ms)" value stopWatch.ElapsedMilliseconds

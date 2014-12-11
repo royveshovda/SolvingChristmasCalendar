@@ -16,47 +16,18 @@
 //Hvor mange unike produkt finnes det i en 8000 x 8000 tabell?
 
 //CORRECT: 14509549
+//RUNTIME: 22300ms (TOO LONG)
 
-//C# Version
-//List<int> numbers = new List<int>();
-//int limit = 8000;
-//for (int i = 1; i <= limit; i++)
-//{
-//    Console.WriteLine(i);
-//    for (int j = 1; j <= limit; j++)
-//    {
-//        int number = i*j;
-//        //if (!numbers.Contains(number))
-//        //{
-//            numbers.Add(number);
-//        //}
-//    }
-//}
-//var dN = numbers.Distinct();
-//int length = dN.ToList().Count;
+let intSeq limit =
+    seq { for a in 1 .. limit do
+            for b in 1 .. limit do
+            yield (a * b) };;
 
-let combineAll n xs = 
-    xs |> List.map (fun x -> n * x)
-
-let allCombinations xs ys =
-    xs |> List.fold (fun acc x -> (combineAll x ys) @ acc) []
-
-let union left right =
-    List.append left right |> Seq.distinct |> List.ofSeq
-
-let getOneArray limit factor =
-    [1 .. limit] |> List.map (fun x -> x * factor)
-
-//TODO: Fix. This is much too slow
 let getAllArrays limit =
-    let d1 = [1 .. limit]
-    let d2 = allCombinations d1 d1
-    let d4 = d2 |> List.toSeq
-    let d5 = d4 |> Seq.distinct
-    Seq.length d5
-    //d3.Length
+    intSeq limit |> Seq.distinct |> Seq.length
 
 let getSolution =
+    let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let d1 = getAllArrays 8000
-
-    sprintf "%A" d1
+    stopWatch.Stop()
+    sprintf "%A (%i ms)" d1 stopWatch.ElapsedMilliseconds

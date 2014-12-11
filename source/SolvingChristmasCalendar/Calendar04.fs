@@ -7,6 +7,7 @@
 //Julegavetips: Det er i kolonnen med overskriften TAN dere finner den laveste målte temperaturen for et døgn.
 
 //CORRECT: 14.12.1981
+//RUNTIME: ??
 
 open System
 open System.IO
@@ -34,7 +35,8 @@ let readFile (filename:string)=
     (date, temp)
 
 let getSolution =
+    let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let filename = "..\\..\\..\\Data\\kilma_data_blindern.txt"
     let (date, temp) = readFile filename
-
-    sprintf "%s (%.1f)" (date.ToShortDateString()) temp
+    stopWatch.Stop()
+    sprintf "%s (%.1f) (%i ms)" (date.ToShortDateString()) temp stopWatch.ElapsedMilliseconds

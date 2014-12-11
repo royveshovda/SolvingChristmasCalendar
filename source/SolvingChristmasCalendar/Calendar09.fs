@@ -7,6 +7,7 @@
 //For eksemplene over (med kun de to regnestykkene) ville svaret vært 324, da det er det minste leddet.  
 
 //CORRECT: 246
+//RUNTIME: 52ms
 
 let checkLength (n:int) (length:int) =
     let s = string n
@@ -41,12 +42,14 @@ let allCombinations xs ys =
     xs |> List.fold (fun acc x -> (combineAll x ys) @ acc) []
 
 let getSolution =
+    let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let n1 = [123 .. 324]
     let n2 = [765 .. 987]
     let c = allCombinations n1 n2
     let valid = c |> List.filter (fun (a,b) -> checkSolution a b)
     let first = valid |> List.sortBy (fun (a,_) -> a)
+    stopWatch.Stop()
     match first with
     | [] -> "Not found"
-    | (a,_)::_ -> sprintf "%i" a
+    | (a,_)::_ -> sprintf "%i (%i ms)" a stopWatch.ElapsedMilliseconds
     

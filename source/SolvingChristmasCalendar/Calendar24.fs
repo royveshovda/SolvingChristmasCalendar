@@ -3,4 +3,11 @@
 //PROBLEM
 //Not opened yet
 
-let getSolution = "Not implemented yet"
+//CORRECT: ??
+//RUNTIME: ??
+
+let getSolution =
+    let stopWatch = System.Diagnostics.Stopwatch.StartNew()
+    //TODO: Implement here
+    stopWatch.Stop()
+    sprintf "Not implemented yet (%i ms)" stopWatch.ElapsedMilliseconds

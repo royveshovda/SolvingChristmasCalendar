@@ -8,6 +8,7 @@
 //TIPS: Også kalt "Perfect number"
 
 //CORRECT: 6,28,496,8128
+//RUNTIME: 4200ms
 
 let perf n =
     n = List.fold (+) 0 (List.filter (fun i -> n % i = 0) [1..(n-1)])
@@ -21,6 +22,8 @@ let prettyPrint list =
     (s.TrimEnd(' ').TrimEnd(','))
 
 let getSolution =
+    let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let numbers = getAllPerfectNumberUnder 10000
     let str = prettyPrint numbers
-    sprintf "%s" str
+    stopWatch.Stop()
+    sprintf "%s (%i ms)" str stopWatch.ElapsedMilliseconds

@@ -7,6 +7,7 @@
 //Eksempler på to slike palindrom-par er 1 (10) = 1 (8) og 1496941 (10) = 5553555 (8)
 
 //CORRECT: 25
+//RUNTIME: 780ms
 
 let isPalindrome (s: string) =
    let arr = s.ToCharArray()
@@ -26,5 +27,7 @@ let palindromesBelow i =
     numbers
 
 let getSolution =
+    let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let numbers = palindromesBelow 1000000
-    sprintf "%i" numbers.Length
+    stopWatch.Stop()
+    sprintf "%i (%i ms)" numbers.Length stopWatch.ElapsedMilliseconds

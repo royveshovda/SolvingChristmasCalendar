@@ -9,6 +9,7 @@
 //Hvor mange av rutene er sorte når springeren har flyttet 200 ganger? (Ja, fargen på ruten springeren forlot den siste gangen skal skiftes før du teller.)
 
 //CORRECT: 32
+//RUNTIME: 6ms
 
 let possibleMoves x y : (int*int) list= 
     let p0 = (x+2, y+1)
@@ -72,10 +73,11 @@ let rec moveN position board n =
         moveN (x',y') board' (n-1)
 
 let getSolution =
+    let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let board = initBoard
     let position = initPosition
     let (_, board') = moveN position board 200
 
     let sum = 100 - List.sum board'
-
-    sprintf "%i" sum
+    stopWatch.Stop()
+    sprintf "%i (%i ms)" sum stopWatch.ElapsedMilliseconds

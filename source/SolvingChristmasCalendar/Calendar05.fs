@@ -9,6 +9,7 @@
 //Julegavetips: Gitt definisjonen av STORETALL ender vi da opp med (9! =) 362880 forskjellige tall.
 
 //CORRECT: 7
+//RUNTIME: ??
 
 let rec insert left x right = seq {
     match right with
@@ -42,11 +43,12 @@ let findMaxPrimeFactor (n:bigint) =
     primes |> List.max
 
 let getSolution =
+    let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let solution =
         (perms [1;2;3;4;5;6;7;8;9])
         |> Seq.toList
         |> List.map composeNumber
         |> List.map findMaxPrimeFactor
         |> List.min
-
-    sprintf "%A" solution
+    stopWatch.Stop()
+    sprintf "%A (%i ms)" solution stopWatch.ElapsedMilliseconds

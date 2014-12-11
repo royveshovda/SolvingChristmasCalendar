@@ -6,8 +6,10 @@
 //Hvor mange piksler er det av den 10. (teller fra 1) mest brukte fargen (i RGB-verdi) i dette bildet?
 
 //CORRECT: 22272
+//RUNTIME: ??
 
 let getSolution =
+    let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let filename = "..\\..\\..\\Data\\Santa.png"
     // get the image
     let bitmap = new System.Drawing.Bitmap(filename)
@@ -28,4 +30,5 @@ let getSolution =
     let v2 = values |> Seq.countBy id |> Seq.toArray |> Array.sortBy (fun (p, n) -> (n * -1))
 
     let (_, number) = v2.[9]
-    sprintf "%i" number
+    stopWatch.Stop()
+    sprintf "%i (%i ms)" number stopWatch.ElapsedMilliseconds
