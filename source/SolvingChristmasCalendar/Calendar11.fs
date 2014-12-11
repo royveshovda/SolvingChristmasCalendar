@@ -16,66 +16,56 @@
 
 //CORRECT: 7830239
 
-open System
+//returns an array of all the primes up to limit
+let get_primes limit =
+    let table = Array.create limit true //use bools in the table to save on memory
+    let tlimit = int (sqrt (float limit)) //max test no for table, ints should be fine
+    let mutable curfactor = 1;
+    while curfactor < tlimit-2 do
+        curfactor <- curfactor+2
+        if table.[curfactor]  then //simple optimisation
+            let mutable v = curfactor*2
+            while v < limit do
+                table.[v] <- false
+                v <- v + curfactor
+    let out = Array.create (limit) 0 //this needs to be greater than pi(limit)
+    let mutable idx = 1
+    out.[0]<-2
+    let mutable curx=1
+    while curx < limit-2 do
+        curx <- curx + 2
+        if table.[curx] then
+            out.[idx]<-curx
+            idx <- idx+1
+    out
 
-let is_sum (l: int[]) (n: int) =
-    (Array.sum l) = n
-
-let get_candidates_of_length length (list: int[]) =
-    let rec get_candidates_of_length_acc len (lst: int[]) position acc =
+let get_candidates_of_length_below_limit length (list: int[]) limit minValue =
+    let rec get_candidates_of_length_acc len (lst: int[]) position (acc: int list) limit =
         let e = (position + len)
         match e with
-        | x when x > lst.Length -> acc
+        | x when x > lst.Length -> 
+            acc |> Set.ofList
         | _ -> 
-            let add = lst |> Array.toSeq |> Seq.skip position |> Seq.take len |> Seq.toArray
-            let newAcc = acc @ [add]
-            get_candidates_of_length_acc len lst (position + 1) newAcc
-    get_candidates_of_length_acc length list 0 []
-
-let get_candidates_of_length_below_limit length (list: int[]) limit =
-    let rec get_candidates_of_length_acc len (lst: int[]) position acc limit =
-        let e = (position + len)
-        match e with
-        | x when x > lst.Length -> acc
-        | _ -> 
-            let add = lst |> Array.toSeq |> Seq.skip position |> Seq.take len |> Seq.toArray
-            let sum = add |> Array.sum
+            let sum =  (Array.sub lst position len) |> Array.sum
             match sum with
-            | s when s > limit -> acc
+            | s when s > limit ->
+                acc |> Set.ofList
             | _ ->
-                let newAcc = acc @ [add]
+                let newAcc = if sum > minValue then sum::acc else acc
                 get_candidates_of_length_acc len lst (position + 1) newAcc limit
-    get_candidates_of_length_acc length list 0 []
+    get_candidates_of_length_acc length list 0 [] limit
 
-let is_prime x =
-    let rec check i =
-        x > 1 &&
-        (double i > sqrt (double x) || (x % i <> 0 && check (i + 1)))
-    check 2                
 
-let array_of_primes_below limit =
-    Seq.initInfinite (fun x -> x)
-    |> Seq.filter is_prime
-    |> Seq.takeWhile (fun elem -> elem < limit)
-    |> Seq.toArray
+let intersection list1 list2 = 
+  Set.intersect (Set.ofList list1) (Set.ofList list2) |> Set.toList
 
 let getSolution =
-    let limit = 1000000
-    let primes = array_of_primes_below limit
-
-    let c541 = get_candidates_of_length_below_limit 541 primes limit
-    printfn "%A" c541
-    //printfn "%i" p.[limit-1]
-    //printfn "Generated %i primes" limit
-    //let b = checkAll p 0
-    //printfn "%A" b
-    "Not implemented yet"
-
-
-//Algoritme:
-//1: Finn en lang rekke med primtall. F.eks. 2000 (kanskje flere)
-//2: Start på laveste (1), og summer 541 sammenhengende. Sjekk om summen er et primtall.
-//3: Hvis nei, Start på neste, og forsøk summer 541 igjen. Helt til summen blir er primtall
-//4: Hvis ja. Sjekk om det er mulig å finne summen med 41, 17 og 7.
-//5: Hvis nei, gå til 3
-//6: Hvis ja: Der er svaret
+    let limit = 10000000
+    let primes = get_primes limit
+    let s541 = get_candidates_of_length_below_limit 541 primes limit 10000
+    let min541 = Set.minElement s541
+    let s41 = get_candidates_of_length_below_limit 41 primes limit min541
+    let s17 = get_candidates_of_length_below_limit 17 primes limit min541
+    let s7 = get_candidates_of_length_below_limit 7 primes limit min541
+    let value = (Set.intersect s541 s41) |> Set.intersect s17 |> Set.intersect s7 |> Set.toList |> List.min
+    sprintf "%i" value
