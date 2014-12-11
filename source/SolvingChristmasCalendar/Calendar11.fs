@@ -51,11 +51,13 @@ let get_prime_candidate n =
     |> Seq.max
 
 let get_next_candidate start =
-    Seq.initInfinite (fun index -> get_prime_candidate (start+index))
+    Seq.initInfinite (fun index ->
+                                printf "%i -- " index   
+                                get_prime_candidate (start+index))
 
 let has_subsetsum_of_primes_of_length length prime =
     let primes = 
-        (sequence_of_primes_below 41L)
+        (sequence_of_primes_below prime)
         |> Seq.toList
 
     let candidates = get_candidates_of_length length primes
@@ -72,13 +74,21 @@ let is_valid n =
     let b1 = true
     let b2 = true
     let b3 = true
+    //let b4 = true
     let b4 = has_subsetsum_of_primes_of_length 541 n
     printfn "%A" n
+    //if b1 then printf " 7 "
+    //if b2 then printf " 17 "
+    //if b3 then printf " 41 "
+    //if b4 then printf " 541 "
+    //printfn ""
+
     b1 && b2 && b3 && b4
 
 let getSolution =
     let b =
-        get_next_candidate 542
+        get_next_candidate 2000
+        //get_next_candidate 200
         |> Seq.skipWhile (fun elem -> (is_valid elem) = false)
         |> Seq.take 1
     printfn "%A" b
