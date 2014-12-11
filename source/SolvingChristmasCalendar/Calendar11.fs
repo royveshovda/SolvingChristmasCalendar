@@ -16,19 +16,18 @@
 
 //CORRECT: 7830239
 
-//returns an array of all the primes up to limit
 let get_primes limit =
-    let table = Array.create limit true //use bools in the table to save on memory
-    let tlimit = int (sqrt (float limit)) //max test no for table, ints should be fine
+    let table = Array.create limit true
+    let tlimit = int (sqrt (float limit))
     let mutable curfactor = 1;
     while curfactor < tlimit-2 do
         curfactor <- curfactor+2
-        if table.[curfactor]  then //simple optimisation
+        if table.[curfactor]  then
             let mutable v = curfactor*2
             while v < limit do
                 table.[v] <- false
                 v <- v + curfactor
-    let out = Array.create (limit) 0 //this needs to be greater than pi(limit)
+    let out = Array.create (limit) 0
     let mutable idx = 1
     out.[0]<-2
     let mutable curx=1
