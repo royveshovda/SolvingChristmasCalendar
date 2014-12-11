@@ -83,7 +83,7 @@
 
 let nextToken (token: int) (listSize: int) =
     match token with
-    | listSize -> 1
+    | x when x = listSize -> 1
     | _ -> token + 1
 
 let rec getNextValidToken (l: bool list) token =
@@ -96,16 +96,19 @@ let rec getNextValidToken (l: bool list) token =
 
 let rec passToken l token =
     let next = getNextValidToken l token
-    match next with
-    | token -> token
-    | _ ->
-        l.[token] <- false
-        let nextJump = getNextValidToken l next
-        match next with
-        | token -> token
-        | _ -> passToken l nextJump       
+    l.[next] <- false
+    "ok"
+//    match next with
+//    | token -> token
+//    | _ ->
+//        l.[token] <- false
+//        let nextJump = getNextValidToken l next
+//        match next with
+//        | token -> token
+//        | _ -> passToken l nextJump       
         
 let getSolution =
     let mutable list = List.init 1500 (fun _ -> true)
     let survivor = passToken list 1
-    sprintf "%i" survivor
+    //sprintf "%i" survivor
+    "Not Implemented yet"
