@@ -14,6 +14,8 @@
 
 //Hva er N?
 
+//CORRECT: 7830239
+
 open System
 
 let is_sum (l: int[]) (n: int) =
@@ -30,99 +32,43 @@ let get_candidates_of_length length (list: int[]) =
             get_candidates_of_length_acc len lst (position + 1) newAcc
     get_candidates_of_length_acc length list 0 []
 
+let get_candidates_of_length_below_limit length (list: int[]) limit =
+    let rec get_candidates_of_length_acc len (lst: int[]) position acc limit =
+        let e = (position + len)
+        match e with
+        | x when x > lst.Length -> acc
+        | _ -> 
+            let add = lst |> Array.toSeq |> Seq.skip position |> Seq.take len |> Seq.toArray
+            let sum = add |> Array.sum
+            match sum with
+            | s when s > limit -> acc
+            | _ ->
+                let newAcc = acc @ [add]
+                get_candidates_of_length_acc len lst (position + 1) newAcc limit
+    get_candidates_of_length_acc length list 0 []
+
 let is_prime x =
     let rec check i =
         x > 1 &&
         (double i > sqrt (double x) || (x % i <> 0 && check (i + 1)))
     check 2                
- 
-let array_of_first_n_primes n =
+
+let array_of_primes_below limit =
     Seq.initInfinite (fun x -> x)
     |> Seq.filter is_prime
-    |> Seq.take n
+    |> Seq.takeWhile (fun elem -> elem < limit)
     |> Seq.toArray
-
-let sequence_of_first_n_primes n =
-    Seq.initInfinite (fun x -> x)
-    |> Seq.filter is_prime
-    |> Seq.take n
-
-let array_of_primes_below list_of_primes n =
-    list_of_primes
-    |> Seq.filter is_prime
-    |> Seq.takeWhile (fun elem -> elem < n)
-    |> Seq.toArray
-
-let sequence_of_primes_below n =
-    Seq.initInfinite (fun x -> x)
-    |> Seq.filter is_prime
-    |> Seq.takeWhile (fun elem -> elem < n)
-
-let get_prime_candidate n =
-    (sequence_of_first_n_primes n)
-    |> Seq.max
-
-let get_next_candidate start =
-    Seq.initInfinite (fun index ->
-                                printf "%i -- " index   
-                                get_prime_candidate (start+index))
-
-let next (primes: int[]) index =
-    let max = primes.Length
-    match index with
-    | x when x > max -> None
-    | _ -> Some(primes.[index]) 
-
-let has_subsetsum_of_primes_of_length length prime (primes: int[]) =
-    let candidates = get_candidates_of_length length primes
-    let result =
-        candidates
-        |> List.filter (fun x -> is_sum x prime)
-    result.Length >= 1
-
-let is_valid n primes=
-    //TODO: Possible to speed up here
-    let b1 = has_subsetsum_of_primes_of_length 7 n primes
-    //let b2 = has_subsetsum_of_primes_of_length 17 n primes
-    //let b3 = has_subsetsum_of_primes_of_length 41 n primes
-    //let b1 = true
-    let b2 = true
-    let b3 = true
-    let b4 = true
-    //let b4 = has_subsetsum_of_primes_of_length 541 n primes
-    printfn "%A" n
-    //if b1 then printf " 7 "
-    //if b2 then printf " 17 "
-    //if b3 then printf " 41 "
-    //if b4 then printf " 541 "
-    //printfn ""
-    b1 && b2 && b3 && b4
-
-let rec checkAll primes index = 
-    let candidate = next primes index
-    match candidate with
-    | None -> None
-    | Some x ->
-        let subPrimes = array_of_primes_below primes x
-        let m = is_valid x subPrimes
-        match m with
-        | true -> Some(primes.[x])
-        | false -> checkAll primes (index + 1)
-        
-    
-    
 
 let getSolution =
-    let limit = 1000
-    let p = array_of_first_n_primes limit
-    printfn "Generated %i primes" limit
-    let b = checkAll p 0
-//    let b =
-//        get_next_candidate 542
-//        |> Seq.skipWhile (fun elem -> (is_valid elem) = false)
-//        |> Seq.take 1
-//    printfn "%A" b
-    printfn "%A" b
+    let limit = 1000000
+    let primes = array_of_primes_below limit
+
+    let c541 = get_candidates_of_length_below_limit 541 primes limit
+    printfn "%A" c541
+    //printfn "%i" p.[limit-1]
+    //printfn "Generated %i primes" limit
+    //let b = checkAll p 0
+    //printfn "%A" b
     "Not implemented yet"
 
 
