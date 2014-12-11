@@ -54,9 +54,8 @@ let get_candidates_of_length_below_limit length (list: int[]) limit minValue =
                 get_candidates_of_length_acc len lst (position + 1) newAcc limit
     get_candidates_of_length_acc length list 0 [] limit
 
-
-let intersection list1 list2 = 
-  Set.intersect (Set.ofList list1) (Set.ofList list2) |> Set.toList
+let intersection set1 set2 set3 set4 = 
+  Set.intersect set1 set2 |> Set.intersect set3 |> Set.intersect set4
 
 let getSolution =
     let limit = 10000000
@@ -66,5 +65,5 @@ let getSolution =
     let s41 = get_candidates_of_length_below_limit 41 primes limit min541
     let s17 = get_candidates_of_length_below_limit 17 primes limit min541
     let s7 = get_candidates_of_length_below_limit 7 primes limit min541
-    let value = (Set.intersect s541 s41) |> Set.intersect s17 |> Set.intersect s7 |> Set.toList |> List.min
+    let value = (intersection s541 s41 s17 s7) |> Set.toList |> List.min
     sprintf "%i" value
