@@ -94,18 +94,19 @@ let rec getNextValidToken (l: bool list) token =
     | true -> token
     | false -> getNextValidToken l (token + 1)
 
-let rec passToken l token =
-    let next = getNextValidToken l token
-    match next with
-    | token -> token
-    | _ ->
-        l.[token] <- false
-        let nextJump = getNextValidToken l next
-        match next with
-        | token -> token
-        | _ -> passToken l nextJump       
+//let rec passToken l token =
+//    let next = getNextValidToken l token
+//    match next with
+//    | token -> token
+//    | _ ->
+//        l.[token] <- false
+//        let nextJump = getNextValidToken l next
+//        match next with
+//        | token -> token
+//        | _ -> passToken l nextJump       
         
 let getSolution =
-    let mutable list = List.init 1500 (fun _ -> true)
-    let survivor = passToken list 1
-    sprintf "%i" survivor
+//    let mutable list = List.init 1500 (fun _ -> true)
+//    let survivor = passToken list 1
+//    sprintf "%i" survivor
+    "Not implemented yet"
