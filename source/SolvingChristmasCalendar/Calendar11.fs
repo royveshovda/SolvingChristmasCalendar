@@ -105,12 +105,15 @@ let rec checkAll primes index =
     | Some x ->
         let subPrimes = array_of_primes_below primes x
         let m = is_valid x subPrimes
-        Some(x)
+        match m with
+        | true -> Some(primes.[x])
+        | false -> checkAll primes (index + 1)
+        
     
     
 
 let getSolution =
-    let limit = 100000
+    let limit = 1000
     let p = array_of_first_n_primes limit
     printfn "Generated %i primes" limit
     let b = checkAll p 0
