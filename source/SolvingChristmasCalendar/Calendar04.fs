@@ -38,8 +38,8 @@ let readFile (filename:string)=
 
 let getSolution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
-    //let filename = "..\\..\\..\\Data\\kilma_data_blindern.txt"
-    let filename = "/Users/royveshovda/src/SolvingChristmasCalendar/source/Data/kilma_data_blindern.txt"
+    let filename = "..\\..\\..\\Data\\kilma_data_blindern.txt"
+    //let filename = "/Users/royveshovda/src/SolvingChristmasCalendar/source/Data/kilma_data_blindern.txt"
     let (date, temp) = readFile filename
     stopWatch.Stop()
     sprintf "%s (%.1f) (%i ms)" (date.ToString("dd.MM.yyyy")) temp stopWatch.ElapsedMilliseconds

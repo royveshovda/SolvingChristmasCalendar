@@ -16,18 +16,18 @@
 //Hvor mange unike produkt finnes det i en 8000 x 8000 tabell?
 
 //CORRECT: 14509549
-//RUNTIME: 10850ms (A BIT TOO LONG)
+//RUNTIME: 4250ms
 
-let intSeq limit =
-    seq { for a in 1 .. limit do
-            for b in a .. limit do
-            yield (a * b) };;
+let allNumbers limit =
+    let numbers = new System.Collections.Generic.HashSet<int>()
+    for a in 1 .. limit do
+        for b in a .. limit do
+            numbers.Add(a*b) |> ignore
+    numbers.Count
 
-let getAllArrays limit =
-    intSeq limit |> Seq.distinct |> Seq.length
 
 let getSolution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
-    let d1 = getAllArrays 8000
+    let d1 = allNumbers 8000
     stopWatch.Stop()
     sprintf "%A (%i ms)" d1 stopWatch.ElapsedMilliseconds

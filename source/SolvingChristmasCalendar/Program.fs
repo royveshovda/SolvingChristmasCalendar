@@ -29,7 +29,6 @@ let main argv =
 
     //TODO: Fix:
     //  5 (180000ms)
-    //  6 (10850ms)
     //  7 ?
 
     System.Console.ReadKey() |> ignore
