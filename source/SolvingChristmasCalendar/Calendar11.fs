@@ -36,10 +36,21 @@ let is_prime x =
         (double i > sqrt (double x) || (x % i <> 0L && check (i + 1L)))
     check 2L                
  
+let array_of_first_n_primes n =
+    Seq.initInfinite (fun x -> int64 x)
+    |> Seq.filter is_prime
+    |> Seq.take n
+    |> Seq.toArray
+
 let sequence_of_first_n_primes n =
     Seq.initInfinite (fun x -> int64 x)
     |> Seq.filter is_prime
     |> Seq.take n
+
+let array_of_primes_below list_of_primes n =
+    list_of_primes
+    |> Seq.filter is_prime
+    |> Seq.takeWhile (fun elem -> elem < n)
 
 let sequence_of_primes_below n =
     Seq.initInfinite (fun x -> int64 x)
@@ -54,6 +65,11 @@ let get_next_candidate start =
     Seq.initInfinite (fun index ->
                                 printf "%i -- " index   
                                 get_prime_candidate (start+index))
+let next (primes: int[]) index
+    let max = primes.Length
+    match index with
+    | x when x > max -> -1
+    | _ -> primes.[index] 
 
 let has_subsetsum_of_primes_of_length length prime =
     let primes = 
@@ -86,13 +102,13 @@ let is_valid n =
     b1 && b2 && b3 && b4
 
 let getSolution =
-    let b =
-        get_next_candidate 2000
-        //get_next_candidate 200
-        |> Seq.skipWhile (fun elem -> (is_valid elem) = false)
-        |> Seq.take 1
-    printfn "%A" b
-
+    let p = array_of_first_n_primes 100000
+//    let b =
+//        get_next_candidate 542
+//        |> Seq.skipWhile (fun elem -> (is_valid elem) = false)
+//        |> Seq.take 1
+//    printfn "%A" b
+    printfn "%A" p
     "Not implemented yet"
 
 
