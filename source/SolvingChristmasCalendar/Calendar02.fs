@@ -13,7 +13,7 @@
 open Common
 
 let correct = "971131737"
-let expectedRuntimeInMs = 1L
+let expectedRuntimeInMs = 2L
 
 let getPrimes = 
     [|11;13;17;19;23;29;31;37;41;43;47;53;59;61;67;71;73;79;83;89;97|]

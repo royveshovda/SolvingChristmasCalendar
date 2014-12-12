@@ -17,7 +17,7 @@
 open Common
 
 let correct = "7830239"
-let expectedRuntimeInMs = 300L
+let expectedRuntimeInMs = 350L
 
 let get_primes limit =
     let table = Array.create limit true

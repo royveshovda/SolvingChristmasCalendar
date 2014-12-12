@@ -9,7 +9,7 @@
 open Common
 
 let correct = "246"
-let expectedRuntimeInMs = 52L
+let expectedRuntimeInMs = 100L
 
 let checkLength (n:int) (length:int) =
     let s = string n

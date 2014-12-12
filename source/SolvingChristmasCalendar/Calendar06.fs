@@ -18,7 +18,7 @@
 open Common
 
 let correct = "14509549"
-let expectedRuntimeInMs = 4250L
+let expectedRuntimeInMs = 4000L
 
 let allNumbers limit =
     let numbers = new System.Collections.Generic.HashSet<int>()

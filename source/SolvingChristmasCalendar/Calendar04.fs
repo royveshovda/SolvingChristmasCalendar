@@ -9,7 +9,7 @@
 open Common
 
 let correct = "14.12.1981"
-let expectedRuntimeInMs = 210L
+let expectedRuntimeInMs = 200L
 
 open System
 open System.IO

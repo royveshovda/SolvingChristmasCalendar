@@ -9,7 +9,7 @@
 open Common
 
 let correct = "25"
-let expectedRuntimeInMs = 780L
+let expectedRuntimeInMs = 1000L
 
 let isPalindrome (s: string) =
    let arr = s.ToCharArray()

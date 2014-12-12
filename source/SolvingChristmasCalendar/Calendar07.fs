@@ -8,7 +8,7 @@
 open Common
 
 let correct = "22272"
-let expectedRuntimeInMs = 2542L
+let expectedRuntimeInMs = 2800L
 
 let getSolution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()

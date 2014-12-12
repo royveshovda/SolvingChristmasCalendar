@@ -10,7 +10,7 @@
 open Common
 
 let correct = "6,28,496,8128"
-let expectedRuntimeInMs = 4200L
+let expectedRuntimeInMs = 4500L
 
 let perf n =
     n = List.fold (+) 0 (List.filter (fun i -> n % i = 0) [1..(n-1)])
