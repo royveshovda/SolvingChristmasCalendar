@@ -6,8 +6,10 @@
 //Oppgaven din er å finne ut av hvor mange tall som er palindrom-par i både ti- og åttetallsystemet, fra og med 1 og opp til 1 000 000 (i titallsystemet). Med et palindrom-par mener vi at samme tall er et palindrom i begge tallsystemene.
 //Eksempler på to slike palindrom-par er 1 (10) = 1 (8) og 1496941 (10) = 5553555 (8)
 
-//CORRECT: 25
-//RUNTIME: 780ms
+open Common
+
+let correct = "25"
+let expectedRuntimeInMs = 780L
 
 let isPalindrome (s: string) =
    let arr = s.ToCharArray()
@@ -30,4 +32,6 @@ let getSolution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let numbers = palindromesBelow 1000000
     stopWatch.Stop()
-    sprintf "%i (%i ms)" numbers.Length stopWatch.ElapsedMilliseconds
+
+    let value = sprintf "%i" numbers.Length
+    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }

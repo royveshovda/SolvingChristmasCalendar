@@ -6,8 +6,10 @@
 //Svaret skal oppgis på følgende form dd.mm.åååå. Eksempelvis: 24.12.2014
 //Julegavetips: Det er i kolonnen med overskriften TAN dere finner den laveste målte temperaturen for et døgn.
 
-//CORRECT: 14.12.1981
-//RUNTIME: 210ms
+open Common
+
+let correct = "14.12.1981"
+let expectedRuntimeInMs = 210L
 
 open System
 open System.IO
@@ -42,4 +44,5 @@ let getSolution =
     //let filename = "/Users/royveshovda/src/SolvingChristmasCalendar/source/Data/kilma_data_blindern.txt"
     let (date, temp) = readFile filename
     stopWatch.Stop()
-    sprintf "%s (%.1f) (%i ms)" (date.ToString("dd.MM.yyyy")) temp stopWatch.ElapsedMilliseconds
+    let value = date.ToString("dd.MM.yyyy")
+    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }

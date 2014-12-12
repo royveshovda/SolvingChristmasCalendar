@@ -7,8 +7,10 @@
 //Hvilke positive tall under 10 000 tilfredsstiller denne egenskapen? Svaret skal være i form av en kommaseparert liste, i stigende rekkefølge. Eksempelvis: 1, 2, 3
 //TIPS: Også kalt "Perfect number"
 
-//CORRECT: 6,28,496,8128
-//RUNTIME: 4200ms
+open Common
+
+let correct = "6,28,496,8128"
+let expectedRuntimeInMs = 4200L
 
 let perf n =
     n = List.fold (+) 0 (List.filter (fun i -> n % i = 0) [1..(n-1)])
@@ -18,12 +20,12 @@ let getAllPerfectNumberUnder n =
     l |> List.filter perf
 
 let prettyPrint list =
-    let s = list |> List.fold (fun acc x -> acc + (sprintf "%i, " x)) ""
+    let s = list |> List.fold (fun acc x -> acc + (sprintf "%i," x)) ""
     (s.TrimEnd(' ').TrimEnd(','))
 
 let getSolution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let numbers = getAllPerfectNumberUnder 10000
-    let str = prettyPrint numbers
     stopWatch.Stop()
-    sprintf "%s (%i ms)" str stopWatch.ElapsedMilliseconds
+    let value = prettyPrint numbers    
+    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }

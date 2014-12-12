@@ -13,8 +13,10 @@
 //Dette fortsetter til det bare er en person igjen. Hvilken person sitter igjen ved julebordets slutt?
 //Svaret skal være i form av nummeret på personen som sitter igjen, eksempelvis 1337
 
-//CORRECT: 953
-//RUNTIME: 1ms
+open Common
+
+let correct = "953"
+let expectedRuntimeInMs = 1L
 
 let lastManStanding n =
     let people = Array.init (n) (fun i -> i+1)
@@ -33,4 +35,5 @@ let getSolution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let survivor = lastManStanding 1500
     stopWatch.Stop()
-    sprintf "%i (%ims)" survivor stopWatch.ElapsedMilliseconds
+    let value = sprintf "%i" survivor
+    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }

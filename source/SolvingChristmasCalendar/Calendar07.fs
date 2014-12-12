@@ -5,8 +5,10 @@
 //http://upload.wikimedia.org/wikipedia/en/archive/f/f4/20100830193250!The_Scream.jpg
 //Hvor mange piksler er det av den 10. (teller fra 1) mest brukte fargen (i RGB-verdi) i dette bildet?
 
-//CORRECT: 22272
-//RUNTIME: ??
+open Common
+
+let correct = "22272"
+let expectedRuntimeInMs = 2542L
 
 let getSolution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
@@ -32,4 +34,5 @@ let getSolution =
 
     let (_, number) = v2.[9]
     stopWatch.Stop()
-    sprintf "%i (%i ms)" number stopWatch.ElapsedMilliseconds
+    let value = sprintf "%i" number
+    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }

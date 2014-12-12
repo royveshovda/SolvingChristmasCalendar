@@ -8,8 +8,10 @@
 //    Etter at springeren har flyttet, skift farge på ruten som springeren nettopp forlot.
 //Hvor mange av rutene er sorte når springeren har flyttet 200 ganger? (Ja, fargen på ruten springeren forlot den siste gangen skal skiftes før du teller.)
 
-//CORRECT: 32
-//RUNTIME: 6ms
+open Common
+
+let correct = "32"
+let expectedRuntimeInMs = 6L
 
 let possibleMoves x y : (int*int) list= 
     let p0 = (x+2, y+1)
@@ -80,4 +82,5 @@ let getSolution =
 
     let sum = 100 - List.sum board'
     stopWatch.Stop()
-    sprintf "%i (%i ms)" sum stopWatch.ElapsedMilliseconds
+    let value = sprintf "%i" sum
+    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }

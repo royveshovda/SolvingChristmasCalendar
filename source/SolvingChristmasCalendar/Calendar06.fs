@@ -15,8 +15,10 @@
 //Denne 9 x 9 tabellen inneholder 36 unike produkt, og de er som følger: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 24, 25, 27, 28, 30, 32, 35, 36, 40, 42, 45, 48, 49, 54, 56, 63, 64, 72 og 81.
 //Hvor mange unike produkt finnes det i en 8000 x 8000 tabell?
 
-//CORRECT: 14509549
-//RUNTIME: 4250ms
+open Common
+
+let correct = "14509549"
+let expectedRuntimeInMs = 4250L
 
 let allNumbers limit =
     let numbers = new System.Collections.Generic.HashSet<int>()
@@ -30,4 +32,5 @@ let getSolution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let d1 = allNumbers 8000
     stopWatch.Stop()
-    sprintf "%A (%i ms)" d1 stopWatch.ElapsedMilliseconds
+    let value = sprintf "%A" d1
+    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }

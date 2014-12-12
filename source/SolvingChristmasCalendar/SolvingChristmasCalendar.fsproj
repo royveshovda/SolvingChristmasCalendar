@@ -48,6 +48,7 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common.fs" />
     <Compile Include="Calendar01.fs" />
     <Compile Include="Calendar02.fs" />
     <Compile Include="Calendar03.fs" />

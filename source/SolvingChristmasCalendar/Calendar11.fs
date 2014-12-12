@@ -14,8 +14,10 @@
 
 //Hva er N?
 
-//CORRECT: 7830239
-//RUNTIME: 300ms
+open Common
+
+let correct = "7830239"
+let expectedRuntimeInMs = 300L
 
 let get_primes limit =
     let table = Array.create limit true
@@ -69,4 +71,6 @@ let getSolution =
     let s7 = get_candidates_of_length_below_limit 7 primes limit min541
     let value = (intersection s541 s41 s17 s7) |> Set.toList |> List.min
     stopWatch.Stop()
-    sprintf "%i (%i ms)" value stopWatch.ElapsedMilliseconds
+    
+    let valueS = sprintf "%i" value
+    { ExpectedValue=correct; ActualValue=valueS; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }

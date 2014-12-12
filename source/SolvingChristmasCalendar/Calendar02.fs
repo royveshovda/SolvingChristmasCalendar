@@ -10,8 +10,10 @@
 //    Det er det laveste mulige tallet som oppfyller alle disse egenskapene.
 //Hva er m dersom n = 9?
 
-//CORRECT: 971131737
-//RUNTIME: 1ms
+open Common
+
+let correct = "971131737"
+let expectedRuntimeInMs = 1L
 
 let getPrimes = 
     [|11;13;17;19;23;29;31;37;41;43;47;53;59;61;67;71;73;79;83;89;97|]
@@ -32,17 +34,6 @@ let pickNext startWithNumber numbers =
     let s2 = s.Substring(1)
     let i2 = System.Convert.ToInt32(s2)
     (n, i2, numbers')
-    
-//let getNumber = 
-//    //97
-//    // 71
-//    //  11
-//    //   13
-//    //    31
-//    //     17
-//    //      73
-//    //       37
-//    971131737
 
 let getSolution = 
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
@@ -57,4 +48,6 @@ let getSolution =
     let (_, i8, a8) = pickNext i7 a7
     let (_, i9, _) = pickNext i8 a8
     stopWatch.Stop()
-    sprintf "%i%i%i%i%i%i%i%i%i (%i ms)" i1 i2 i3 i4 i5 i6 i7 i8 i9 (stopWatch.ElapsedMilliseconds)
+
+    let value = sprintf "%i%i%i%i%i%i%i%i%i" i1 i2 i3 i4 i5 i6 i7 i8 i9
+    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }

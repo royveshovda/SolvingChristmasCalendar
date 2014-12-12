@@ -6,8 +6,10 @@
 //Hva er den minste verdien for et av leddene i REGNESTYKKER?
 //For eksemplene over (med kun de to regnestykkene) ville svaret vært 324, da det er det minste leddet.  
 
-//CORRECT: 246
-//RUNTIME: 52ms
+open Common
+
+let correct = "246"
+let expectedRuntimeInMs = 52L
 
 let checkLength (n:int) (length:int) =
     let s = string n
@@ -49,7 +51,8 @@ let getSolution =
     let valid = c |> List.filter (fun (a,b) -> checkSolution a b)
     let first = valid |> List.sortBy (fun (a,_) -> a)
     stopWatch.Stop()
-    match first with
-    | [] -> "Not found"
-    | (a,_)::_ -> sprintf "%i (%i ms)" a stopWatch.ElapsedMilliseconds
-    
+    let value =
+        match first with
+        | [] -> "Not found"
+        | (a,_)::_ -> sprintf "%i" a    
+    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }

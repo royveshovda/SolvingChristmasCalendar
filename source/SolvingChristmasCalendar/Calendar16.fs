@@ -3,11 +3,13 @@
 //PROBLEM
 //Not opened yet
 
-//CORRECT: ??
-//RUNTIME: ??
+open Common
+
+let correct = "N/A"
+let expectedRuntimeInMs = 0L
 
 let getSolution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     //TODO: Implement here
     stopWatch.Stop()
-    sprintf "Not implemented yet (%i ms)" stopWatch.ElapsedMilliseconds
+    { ExpectedValue=correct; ActualValue=correct; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }

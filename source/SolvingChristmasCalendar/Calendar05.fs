@@ -8,8 +8,10 @@
 //For eksemplet over (med kun 483761925 og 879456123) ville svaret vært 491, da 491 og 4111 er de største primfaktorene, men 491 er den minste av disse.
 //Julegavetips: Gitt definisjonen av STORETALL ender vi da opp med (9! =) 362880 forskjellige tall.
 
-//CORRECT: 7
-//RUNTIME: 180000ms (TOO SLOW)
+open Common
+
+let correct = "7"
+let expectedRuntimeInMs = 4000L
 
 let rec insert left x right = seq {
     match right with
@@ -26,19 +28,18 @@ let rec perms permute =
         | head :: tail -> yield! Seq.collect (insert [] head) (perms tail)
     }
 
-//TODO: Try to make faster
 let decompose_prime n = 
   let rec loop c p =
     if c < (p * p) then [c]
-    elif c % p = 0I then p :: (loop (c/p) p)
-    else loop c (p + 1I) 
-  loop n 2I
+    elif c % p = 0 then p :: (loop (c/p) p)
+    else loop c (p + 1) 
+  loop n 2
 
 let rec composeNumber lst =
     let temp = List.fold (fun acc x -> acc+(string x)) "" lst
-    System.Numerics.BigInteger.Parse temp
+    System.Convert.ToInt32 temp
 
-let findMaxPrimeFactor (n:bigint) =
+let findMaxPrimeFactor (n:int) =
     let primes = decompose_prime n
     primes |> List.max
 
@@ -51,4 +52,5 @@ let getSolution =
         |> List.map findMaxPrimeFactor
         |> List.min
     stopWatch.Stop()
-    sprintf "%A (%i ms)" solution stopWatch.ElapsedMilliseconds
+    let value = sprintf "%A" solution
+    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }
