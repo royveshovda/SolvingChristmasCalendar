@@ -10,7 +10,7 @@ open Common
 let correct = "22272"
 let expectedRuntimeInMs = 2800L
 
-let getSolution =
+let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let filename = "..\\..\\..\\Data\\Santa.png"
     //let filename = "/Users/royveshovda/src/SolvingChristmasCalendar/source/Data/Santa.png"

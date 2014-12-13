@@ -28,7 +28,7 @@ let allNumbers limit =
     numbers.Count
 
 
-let getSolution =
+let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let d1 = allNumbers 8000
     stopWatch.Stop()

@@ -74,7 +74,7 @@ let rec moveN position board n =
         let ((x', y'), board') = move1 position board
         moveN (x',y') board' (n-1)
 
-let getSolution =
+let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let board = initBoard
     let position = initPosition

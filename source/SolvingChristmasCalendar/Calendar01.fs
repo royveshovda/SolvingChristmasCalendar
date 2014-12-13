@@ -28,7 +28,7 @@ let palindromesBelow i =
     let numbers = n |> List.filter check10Palindrome |> List.filter check8Palindrome
     numbers
 
-let getSolution =
+let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let numbers = palindromesBelow 1000000
     stopWatch.Stop()

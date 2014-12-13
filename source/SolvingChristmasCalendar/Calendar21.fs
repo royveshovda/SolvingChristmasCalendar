@@ -8,7 +8,7 @@ open Common
 let correct = "N/A"
 let expectedRuntimeInMs = 0L
 
-let getSolution =
+let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     //TODO: Implement here
     stopWatch.Stop()

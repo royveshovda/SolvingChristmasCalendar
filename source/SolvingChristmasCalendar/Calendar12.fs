@@ -29,7 +29,7 @@ let rec countFriday13 date stop =
             countFriday13impl next stop nextCount
     countFriday13impl date stop 0
 
-let getSolution =
+let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let first = new System.DateTime(1337, 1, 1)
     let start = nextFriday first

@@ -23,7 +23,7 @@ let prettyPrint list =
     let s = list |> List.fold (fun acc x -> acc + (sprintf "%i," x)) ""
     (s.TrimEnd(' ').TrimEnd(','))
 
-let getSolution =
+let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let numbers = getAllPerfectNumberUnder 10000
     stopWatch.Stop()

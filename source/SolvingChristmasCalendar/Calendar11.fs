@@ -19,28 +19,6 @@ open Common
 let correct = "7830239"
 let expectedRuntimeInMs = 350L
 
-let get_primes limit =
-    let table = Array.create limit true
-    let tlimit = int (sqrt (float limit))
-    let mutable curfactor = 1;
-    while curfactor < tlimit-2 do
-        curfactor <- curfactor+2
-        if table.[curfactor]  then
-            let mutable v = curfactor*2
-            while v < limit do
-                table.[v] <- false
-                v <- v + curfactor
-    let out = Array.create (limit) 0
-    let mutable idx = 1
-    out.[0]<-2
-    let mutable curx=1
-    while curx < limit-2 do
-        curx <- curx + 2
-        if table.[curx] then
-            out.[idx]<-curx
-            idx <- idx+1
-    out
-
 let get_candidates_of_length_below_limit length (list: int[]) limit minValue =
     let rec get_candidates_of_length_acc len (lst: int[]) position (acc: int list) limit =
         let e = (position + len)
@@ -60,7 +38,7 @@ let get_candidates_of_length_below_limit length (list: int[]) limit minValue =
 let intersection set1 set2 set3 set4 = 
   Set.intersect set1 set2 |> Set.intersect set3 |> Set.intersect set4
 
-let getSolution =
+let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let limit = 10000000
     let primes = get_primes limit

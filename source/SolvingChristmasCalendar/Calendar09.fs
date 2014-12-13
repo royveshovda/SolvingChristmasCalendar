@@ -43,7 +43,7 @@ let combineAll n xs =
 let allCombinations xs ys =
     xs |> List.fold (fun acc x -> (combineAll x ys) @ acc) []
 
-let getSolution =
+let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let n1 = [123 .. 324]
     let n2 = [765 .. 987]

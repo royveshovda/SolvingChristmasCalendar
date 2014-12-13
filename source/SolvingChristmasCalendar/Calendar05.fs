@@ -43,7 +43,7 @@ let findMaxPrimeFactor (n:int) =
     let primes = decompose_prime n
     primes |> List.max
 
-let getSolution =
+let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let solution =
         (perms [1;2;3;4;5;6;7;8;9])

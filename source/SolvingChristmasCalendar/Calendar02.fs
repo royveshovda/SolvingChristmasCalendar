@@ -35,7 +35,7 @@ let pickNext startWithNumber numbers =
     let i2 = System.Convert.ToInt32(s2)
     (n, i2, numbers')
 
-let getSolution = 
+let get_solution = 
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let i1 = 9
     let a = getPrimes

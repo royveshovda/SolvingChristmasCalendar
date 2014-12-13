@@ -38,7 +38,7 @@ let readFile (filename:string)=
 
     (date, temp)
 
-let getSolution =
+let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let filename = "..\\..\\..\\Data\\kilma_data_blindern.txt"
     //let filename = "/Users/royveshovda/src/SolvingChristmasCalendar/source/Data/kilma_data_blindern.txt"

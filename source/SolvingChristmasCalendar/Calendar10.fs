@@ -31,7 +31,7 @@ let lastManStanding n =
                lastManStandingImpl nextNextIndex
     lastManStandingImpl 0
 
-let getSolution =
+let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let survivor = lastManStanding 1500
     stopWatch.Stop()
