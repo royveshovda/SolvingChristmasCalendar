@@ -7,27 +7,46 @@
 
 open Common
 
-let valid_nummber (n:string) =
+let correct = "99"
+let expectedRuntimeInMs = 70L
+
+let valid_nummber (n:char) =
     match n with
-    | 0 -> true
-    | 1 -> true
-    | 6 -> true
-    | 8 -> true
-    | 9 -> true
+    | '0' -> true
+    | '1' -> true
+    | '6' -> true
+    | '8' -> true
+    | '9' -> true
     | _ -> false
 
 let only_valid_characters (n:int) =
     let s = sprintf "%i" n
     let arr = s.ToCharArray()
-    Array.fold (fun state item -> state && (valid_nummber item)) true arr
+    arr |> Array.fold (fun state item -> state && (valid_nummber item)) true
 
-let correct = "N/A"
-let expectedRuntimeInMs = 0L
+let flip_char c =
+    match c with
+    | '0' -> '0'
+    | '1' -> '1'
+    | '6' -> '9'
+    | '8' -> '8'
+    | '9' -> '6'
+    | _ -> 'X'
+
+let is_flippable (n:int) =
+    let s = sprintf "%i" n
+    let arr = s.ToCharArray()
+    let flipped = arr |> Array.rev |> Array.map flip_char
+    flipped = arr
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
-    //TODO: Implement here
-    let v = only_valid_characters 123
-    let value = sprintf "%A" v
+    let all = [|0 .. 100000|]
+    let valid =
+        all
+        |> Array.filter only_valid_characters //This speeds up the process by 40%
+        |> Array.filter is_flippable
+
+    let value = sprintf "%A" valid.Length
     stopWatch.Stop()
     { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }
