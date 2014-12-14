@@ -10,8 +10,8 @@ open Common
 let correct = "99"
 let expectedRuntimeInMs = 70L
 
-let valid_nummber (n:char) =
-    match n with
+let valid_character c =
+    match c with
     | '0' -> true
     | '1' -> true
     | '6' -> true
@@ -19,10 +19,10 @@ let valid_nummber (n:char) =
     | '9' -> true
     | _ -> false
 
-let only_valid_characters (n:int) =
+let only_valid_characters n =
     let s = sprintf "%i" n
     let arr = s.ToCharArray()
-    arr |> Array.fold (fun state item -> state && (valid_nummber item)) true
+    arr |> Array.fold (fun state item -> state && (valid_character item)) true
 
 let flip_char c =
     match c with
@@ -33,7 +33,7 @@ let flip_char c =
     | '9' -> '6'
     | _ -> 'X'
 
-let is_flippable (n:int) =
+let is_flippable n =
     let s = sprintf "%i" n
     let arr = s.ToCharArray()
     let flipped = arr |> Array.rev |> Array.map flip_char
