@@ -26,17 +26,24 @@ let get_candidates =
             }
     sequence |> Seq.toArray
 
+let dividable_not_both_by_10 x y =
+    let bx = (x % 10 = 0)
+    let by = (y % 10 = 0)
+    (bx && by)
+
+
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
 
     let numbers =
         get_candidates
         |> Array.filter (fun (_,_,n) -> n > 1000 && n < 9999)
+        //|> Array.filter (fun (x,y,_) -> dividable_not_both_by_10 x y)
 
     //TODO: Filter out all where both x and y is dividable with 10
     //TODO: Check if numbers in x and y can compose n
 
-    let value = sprintf "%A" numbers.Length
+    let value = sprintf "%A" numbers
 
     stopWatch.Stop()
     { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }
