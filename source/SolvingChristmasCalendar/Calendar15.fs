@@ -15,13 +15,13 @@
 
 open Common
 
-let correct = "N/A"
-let expectedRuntimeInMs = 0L
+let correct = "7"
+let expectedRuntimeInMs = 30L
 
 let get_candidates =
     let sequence =
-        seq { for x in 10 .. 99 do 
-                for y in 10 .. 99 do 
+        seq { for x in 11 .. 99 do 
+                for y in 11 .. 99 do 
                     yield ( x, y, (x*y))
             }
     sequence |> Seq.toArray
@@ -29,21 +29,26 @@ let get_candidates =
 let dividable_not_both_by_10 x y =
     let bx = (x % 10 = 0)
     let by = (y % 10 = 0)
-    (bx && by)
+    not (bx && by)
 
+let valid_numbers (x: int) (y: int) (n: int) =
+    let arr_x = (string x).ToCharArray()
+    let arr_y = (string y).ToCharArray()
+    let arr_n = (string n).ToCharArray() |> Array.sort
+    let arr_xy = (Array.append arr_x arr_y) |> Array.sort
+    arr_xy = arr_n
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
 
     let numbers =
         get_candidates
-        |> Array.filter (fun (_,_,n) -> n > 1000 && n < 9999)
-        //|> Array.filter (fun (x,y,_) -> dividable_not_both_by_10 x y)
-
-    //TODO: Filter out all where both x and y is dividable with 10
-    //TODO: Check if numbers in x and y can compose n
-
-    let value = sprintf "%A" numbers
-
+        |> Array.filter (fun (_,_,n) -> n >= 1000 && n <= 9999)
+        |> Array.filter (fun (x,y,_) -> dividable_not_both_by_10 x y)
+        |> Array.filter (fun (x,y,n) -> valid_numbers x y n)
+        |> Array.toSeq
+        |> Seq.distinctBy (fun (_,_,n) -> n)
+        |> Seq.toList
+    let value = sprintf "%A" numbers.Length
     stopWatch.Stop()
     { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }
