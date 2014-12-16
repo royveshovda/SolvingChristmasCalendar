@@ -6,36 +6,33 @@
 //For eksempel, hvis stringen er “02”, så er svaret 10, fordi  2^10 = 1024 og ingen lavere toerpotenser inneholder “02”.
 //Hva er n for den minste toerpotensen som inneholder “472047”? 
 
-//C#
-//static void Main(string[] args)
-//{
-//    int n = 0;
-//    var running = true;
-//    while (running)
-//    {
-//                
-//        var sum = (BigInteger.Pow(2, n)).ToString();
-//        if (sum.Contains("472047"))
-//        {
-//            running = false;
-//        }
-//        n++;
-//        if (n >= 100000)
-//        {
-//            running = false;
-//        }
-//    }
-//    Console.WriteLine(n-1);
-//    Console.ReadLine();
-//}
+//http://stackoverflow.com/questions/383587/how-do-you-do-integer-exponentiation-in-c
+
+//MIN: 687 (SQRT (472047))
+//MAX: Try 2000
 
 open Common
 
 let correct = "1765"
-let expectedRuntimeInMs = 0L
+let expectedRuntimeInMs = 40L
+
+let generate_candidates min max =
+    let numbers = [| min .. max |]
+    numbers |> Array.map (fun elem -> (elem, (System.Numerics.BigInteger.Pow(2I, elem))))
+
+let is_correct (n: bigint) =
+    n.ToString().Contains("472047")
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
-    //TODO: Implement here
+
+    let numbers = generate_candidates 687 2000
+    let n2 =
+        numbers
+        |> Array.filter (fun (_, big) -> is_correct big)
+    let (n,_) = n2.[0]
+    
+    let value = sprintf "%A" n
+
     stopWatch.Stop()
-    { ExpectedValue=correct; ActualValue=correct; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }
+    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }
