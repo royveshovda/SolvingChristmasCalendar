@@ -6,11 +6,8 @@
 //4  5  6
 //7  8  9
 //    0
-//
 //En springer (også kalt hest) i sjakk flytter i en L-formet bevegelse: Ett felt horisontalt eller vertikalt og deretter to felt vinkelrett på den første delen av trekket. Eksempel: Fra tallet 1 på keypaden kan springeren flytte til enten 6 eller 8, og fra tallet 4 kan springeren flytte til enten 3, 9 eller 0.
-//
 //Dersom man starter på tallet 1, og velger påfølgende tall slik som springeren flytter i sjakk, hvor mange unike stier av 10 tall finnes det? En sti kan besøke samme tall mer enn en gang.
-//
 //Et eksempel på en sti kan være: 1 6 1 6 1 6 1 6 1 8
 
 open Common
