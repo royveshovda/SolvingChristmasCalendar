@@ -15,29 +15,58 @@ open System.IO
 let correct = "N/A"
 let expectedRuntimeInMs = 0L
 
-let filename = "..\\..\\..\\Data\\words.txt"
+//let filename = "..\\..\\..\\Data\\words.txt"
+let filename = "/Users/royveshovda/src/SolvingChristmasCalendar/source/Data/words.txt"
 
 let read_words (filename:string)=
     use fs = File.OpenText(filename)
     let text = fs.ReadToEnd()
     let words =
         text.Split ('\n')
+        |> Seq.mapi (fun n elem -> (n,(elem.ToLower())))
         |> Seq.toArray
     words
 
-
 let is_anagram (word1: string) (word2: string) =
-    let s1 = ( word1.ToCharArray() |> Array.sort)
-    let s2 = ( word2.ToCharArray() |> Array.sort)
-    s1 = s2
+    match (word1.Length = word2.Length) with
+    | false -> false
+    | true ->
+        let s1 = ( word1.ToCharArray() |> Array.sort)
+        let s2 = ( word2.ToCharArray() |> Array.sort)
+        s1 = s2
+
+let find_number_of_anagrams (word: string) (words: string[]) (counter: int) =
+    printfn "%i" counter
+    let l = word.Length
+    let candidates = Array.filter (fun (elem: string) -> elem.Length = l) words
+    let count =
+        candidates
+        |> Array.map (fun elem -> if (is_anagram word elem) then 1 else 0)
+        |> Array.sum
+    count
+
+//TODO: Loop and remove found anagrams
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     //let v = is_anagram "word1" "word1"
-    let v = read_words filename
+    let words = read_words filename
 
+    let single_words = Array.map (fun (_, elem) -> elem) words
+
+    let v3 =
+        words
+        |> Array.map (fun (n, elem) -> (elem, (find_number_of_anagrams elem single_words n)))
+        |> Array.maxBy (fun (_, count) -> count)
+
+    //let v2 = find_anagrams "aba" words
     //TODO: Implement more here
 
-    let value = sprintf "%A" v
+    let value = sprintf "%A" v3
     stopWatch.Stop()
-    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }
+    {
+        ExpectedValue=correct;
+        ActualValue=value;
+        ExpectedRuntimeInMs=expectedRuntimeInMs;
+        ActualRuntimeInMs=stopWatch.ElapsedMilliseconds
+    }
