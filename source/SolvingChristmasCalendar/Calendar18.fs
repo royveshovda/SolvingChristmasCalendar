@@ -13,7 +13,7 @@ open Common
 open System.IO
 
 let correct = "agnor"
-let expectedRuntimeInMs = 2200L
+let expectedRuntimeInMs = 2100L
 
 //let filename = "..\\..\\..\\Data\\words.txt"
 let filename = "/Users/royveshovda/src/SolvingChristmasCalendar/source/Data/words.txt"
@@ -28,15 +28,13 @@ let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let words = read_lines filename
 
-    let result =
+    let value =
         words
         |> Seq.groupBy (fun (_, x) -> x)
         |> Seq.sortBy (fun (_, ws) -> -(ws |> Seq.length))
         |> Seq.head
         |> fst
         |> System.String.Concat
-
-    let value = sprintf "%A" result
     stopWatch.Stop()
     {
         ExpectedValue=correct;
