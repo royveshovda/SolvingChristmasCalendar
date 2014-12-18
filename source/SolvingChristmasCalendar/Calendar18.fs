@@ -15,8 +15,8 @@ open System.IO
 let correct = "agnor"
 let expectedRuntimeInMs = 2100L
 
-//let filename = "..\\..\\..\\Data\\words.txt"
-let filename = "/Users/royveshovda/src/SolvingChristmasCalendar/source/Data/words.txt"
+let filename = "..\\..\\..\\Data\\words.txt"
+//let filename = "/Users/royveshovda/src/SolvingChristmasCalendar/source/Data/words.txt"
 
 let readLines filePath = System.IO.File.ReadLines(filePath);;
 
