@@ -12,57 +12,31 @@
 open Common
 open System.IO
 
-let correct = "N/A"
-let expectedRuntimeInMs = 0L
+let correct = "agnor"
+let expectedRuntimeInMs = 2200L
 
 //let filename = "..\\..\\..\\Data\\words.txt"
 let filename = "/Users/royveshovda/src/SolvingChristmasCalendar/source/Data/words.txt"
 
-let read_words (filename:string)=
-    use fs = File.OpenText(filename)
-    let text = fs.ReadToEnd()
-    let words =
-        text.Split ('\n')
-        |> Seq.mapi (fun n elem -> (n,(elem.ToLower())))
-        |> Seq.toArray
-    words
+let readLines filePath = System.IO.File.ReadLines(filePath);;
 
-let is_anagram (word1: string) (word2: string) =
-    match (word1.Length = word2.Length) with
-    | false -> false
-    | true ->
-        let s1 = ( word1.ToCharArray() |> Array.sort)
-        let s2 = ( word2.ToCharArray() |> Array.sort)
-        s1 = s2
-
-let find_number_of_anagrams (word: string) (words: string[]) (counter: int) =
-    printfn "%i" counter
-    let l = word.Length
-    let candidates = Array.filter (fun (elem: string) -> elem.Length = l) words
-    let count =
-        candidates
-        |> Array.map (fun elem -> if (is_anagram word elem) then 1 else 0)
-        |> Array.sum
-    count
-
-//TODO: Loop and remove found anagrams
+let read_lines (filename:string) =
+    System.IO.File.ReadLines(filename)
+    |> Seq.map (fun (elem: string) -> (elem, (elem.ToLower().ToCharArray()) |> Array.sort))
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
-    //let v = is_anagram "word1" "word1"
-    let words = read_words filename
+    let words = read_lines filename
 
-    let single_words = Array.map (fun (_, elem) -> elem) words
-
-    let v3 =
+    let result =
         words
-        |> Array.map (fun (n, elem) -> (elem, (find_number_of_anagrams elem single_words n)))
-        |> Array.maxBy (fun (_, count) -> count)
+        |> Seq.groupBy (fun (_, x) -> x)
+        |> Seq.sortBy (fun (_, ws) -> -(ws |> Seq.length))
+        |> Seq.head
+        |> fst
+        |> System.String.Concat
 
-    //let v2 = find_anagrams "aba" words
-    //TODO: Implement more here
-
-    let value = sprintf "%A" v3
+    let value = sprintf "%A" result
     stopWatch.Stop()
     {
         ExpectedValue=correct;
