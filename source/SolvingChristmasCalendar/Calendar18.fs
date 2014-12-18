@@ -31,8 +31,7 @@ let get_solution =
     let value =
         words
         |> Seq.groupBy (fun (_, x) -> x)
-        |> Seq.sortBy (fun (_, ws) -> -(ws |> Seq.length))
-        |> Seq.head
+        |> Seq.minBy (fun (_, ws) -> -(ws |> Seq.length))
         |> fst
         |> System.String.Concat
     stopWatch.Stop()
