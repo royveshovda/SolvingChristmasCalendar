@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{467DA680-0
 	ProjectSection(SolutionItems) = preProject
 		Data\kilma_data_blindern.txt = Data\kilma_data_blindern.txt
 		Data\Santa.png = Data\Santa.png
+		Data\words.txt = Data\words.txt
 	EndProjectSection
 EndProject
 Global
