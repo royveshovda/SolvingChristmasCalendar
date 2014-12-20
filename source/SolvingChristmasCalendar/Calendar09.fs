@@ -11,7 +11,7 @@ open Common
 let correct = "246"
 let expectedRuntimeInMs = 100L
 
-let checkLength (n:int) (length:int) =
+let checkLength n length =
     let s = string n
     s.Length = length
 
@@ -28,7 +28,7 @@ let checkForAllDigits (s:string) =
     let b9 = s.Contains("9")
     b0 && b1 && b2 && b3 && b4 && b5 && b6 && b7 && b8 && b9
 
-let checkSolution (a:int) (b:int) =
+let checkSolution a b =
     let sum = a + b
     let b1 = checkLength a 3
     let b2 = checkLength b 3

@@ -19,7 +19,7 @@ open Common
 let correct = "7830239"
 let expectedRuntimeInMs = 350L
 
-let get_candidates_of_length_below_limit length (list: int[]) limit minValue =
+let get_candidates_of_length_below_limit length list limit minValue =
     let rec get_candidates_of_length_acc len (lst: int[]) position (acc: int list) limit =
         let e = (position + len)
         match e with

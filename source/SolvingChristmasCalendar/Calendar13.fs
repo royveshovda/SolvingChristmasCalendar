@@ -12,12 +12,12 @@ open Common
 let correct = "36"
 let expectedRuntimeInMs = 6L
 
-let is_not_palindrome (i: int) =
+let is_not_palindrome i =
     let s = sprintf "%i" i
     let arr = s.ToCharArray()
     arr <> Array.rev arr
 
-let get_reverse (i: int) =
+let get_reverse i =
     let s = sprintf "%i" i
     let arr = s.ToCharArray()
     int (new System.String((Array.rev arr)))

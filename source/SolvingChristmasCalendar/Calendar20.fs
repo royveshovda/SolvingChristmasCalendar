@@ -12,7 +12,7 @@ open Common
 let correct = "102485"
 let expectedRuntimeInMs = 1500L
 
-let digit_sum (n:int) =
+let digit_sum n =
     let s = string n
     s.ToCharArray()
     |> Array.map (fun elem -> System.Int32.Parse(string elem))
@@ -24,7 +24,7 @@ let is_legal ((x:int),(y:int)) =
     let total = (digit_sum x') + (digit_sum y')
     total <= 19
 
-let rec expand (expandList: (int*int) list) (findings: System.Collections.Generic.HashSet<int*int>) =
+let rec expand expandList (findings: System.Collections.Generic.HashSet<int*int>) =
     match expandList with
     | [] -> findings
     | (x,y)::tail ->        
@@ -40,7 +40,7 @@ let get_solution =
     let findings = new System.Collections.Generic.HashSet<int*int>();
     findings.Add((0,0)) |> ignore
     let v = expand [(0,0)] findings
-    let value = sprintf "%A" v.Count
+    let value = sprintf "%i" v.Count
     stopWatch.Stop()
     {
         ExpectedValue=correct;

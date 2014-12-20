@@ -31,7 +31,7 @@ let dividable_not_both_by_10 x y =
     let by = (y % 10 = 0)
     not (bx && by)
 
-let valid_numbers (x: int) (y: int) (n: int) =
+let valid_numbers x y n =
     let arr_x = (string x).ToCharArray()
     let arr_y = (string y).ToCharArray()
     let arr_n = (string n).ToCharArray() |> Array.sort

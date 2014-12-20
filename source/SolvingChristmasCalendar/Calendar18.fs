@@ -20,7 +20,7 @@ let filename = "..\\..\\..\\Data\\words.txt"
 
 let readLines filePath = System.IO.File.ReadLines(filePath);;
 
-let read_lines (filename:string) =
+let read_lines filename =
     System.IO.File.ReadLines(filename)
     |> Seq.map (fun (elem: string) -> (elem, (elem.ToLower().ToCharArray()) |> Array.sort))
 

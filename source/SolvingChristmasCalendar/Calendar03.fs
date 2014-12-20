@@ -41,7 +41,7 @@ let getColor (x,y) (board: int list) =
     let i = 10*x + y
     board.Item(i)
 
-let findNextMove (possibilities:(int*int) list) board currentColor =
+let findNextMove possibilities board currentColor =
     let sameColorPossibilities = possibilities |> List.filter (fun (x,y) -> (getColor (x,y) board) = currentColor ) |> ascending
     let oppositeColorPossibilities = possibilities |> List.filter (fun (x,y) -> (getColor (x,y) board) <> currentColor ) |> descending
 

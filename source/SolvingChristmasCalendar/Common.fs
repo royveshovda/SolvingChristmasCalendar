@@ -2,7 +2,7 @@
 
 type Result = { ExpectedValue:string; ActualValue:string; ExpectedRuntimeInMs:int64; ActualRuntimeInMs:int64 }
 
-let formatResult (result:Result) =
+let formatResult result =
     let res =
         match result.ActualValue with
         | x when x = result.ExpectedValue -> sprintf "%s" result.ActualValue

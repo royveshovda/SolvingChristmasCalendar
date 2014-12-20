@@ -24,7 +24,7 @@ let parseLine (line:string) =
     (date,fValue)
 
 //TODO: Improve parsing of file and sections
-let readFile (filename:string)=
+let readFile filename=
     use fs = File.OpenText(filename)
     let text = fs.ReadToEnd()
     let (date, temp) =
