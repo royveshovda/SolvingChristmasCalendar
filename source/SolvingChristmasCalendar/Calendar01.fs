@@ -11,17 +11,13 @@ open Common
 let correct = "25"
 let expectedRuntimeInMs = 1000L
 
-let isPalindrome (s: string) =
-   let arr = s.ToCharArray()
-   arr = Array.rev arr
-
 let check10Palindrome i =
     let s = sprintf "%i" i
-    isPalindrome s
+    is_palindrome s
 
 let check8Palindrome (i:int) =
     let s = System.Convert.ToString(i,8)
-    isPalindrome s
+    is_palindrome s
 
 let palindromesBelow i = 
     let n = [1 .. i]

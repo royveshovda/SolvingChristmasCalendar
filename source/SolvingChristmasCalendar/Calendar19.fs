@@ -52,10 +52,6 @@ let text =
         "etkritiskinnleggomlandetsstyrepåsosialemedier"
     t.ToLower()
 
-let is_palindrome (s: string) =
-   let arr = s.ToCharArray()
-   arr = Array.rev arr
-
 let get_sub_palindromes (text: string)=
     let length = text.Length
     [|

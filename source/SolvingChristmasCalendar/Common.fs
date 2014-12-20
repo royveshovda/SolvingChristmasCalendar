@@ -31,3 +31,7 @@ let get_primes limit =
             out.[idx]<-curx
             idx <- idx+1
     out
+
+let is_palindrome (s: string) =
+   let arr = s.ToCharArray()
+   arr = Array.rev arr
