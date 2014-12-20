@@ -9,8 +9,8 @@
 
 open Common
 
-let correct = "N/A"
-let expectedRuntimeInMs = 0L
+let correct = "102485"
+let expectedRuntimeInMs = 220000L
 
 let digit_sum (n:int) =
     let s = string n
@@ -37,18 +37,24 @@ let rec expand (x,y) (findings: (int*int)[]) =
         Array.fold (fun acc elem -> expand elem acc) findings' candidates
 
 
+let rec expand2 (expandList: (int*int) list) (findings: (int*int)[]) =
+    printfn "%i (%i)" findings.Length expandList.Length
 
-//At a position:
-//1: find candidates
-//2: Check if they are legal
-//3: For all legal: Add to findings
-//4: For all legal: Expand using new list
-//5: Keep adding to findings
-
+    match expandList with
+    | [] -> findings
+    | (x,y)::tail ->        
+        let candidates =
+            [|((x + 1), y); ((x - 1), y); (x, (y + 1)); (x, (y - 1))|]
+            |> Array.filter is_legal
+            |> Array.filter (fun elem -> not (Array.exists (fun e -> e = elem) findings))
+        let findings' = Array.append findings candidates
+        let expandList' = tail @ (Array.toList candidates)
+        expand2 expandList' findings'
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
-    let v = expand (0,0) [||]
+    //let v = expand (0,0) [||]
+    let v = expand2 [(0,0)] [|(0,0)|]
     let value = sprintf "%A" v.Length
     stopWatch.Stop()
     {
