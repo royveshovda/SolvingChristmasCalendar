@@ -15,17 +15,41 @@ let expectedRuntimeInMs = 0L
 let digit_sum (n:int) =
     let s = string n
     s.ToCharArray()
-    |> Array.map (fun elem -> (int elem))
+    |> Array.map (fun elem -> System.Int32.Parse(string elem))
     |> Array.sum
 
-//let is_legal (x,y) =
-//    let y' = System.Math.Abs(y)
+let is_legal ((x:int),(y:int)) =
+    let x' = System.Math.Abs(x)
+    let y' = System.Math.Abs(y)
+    let total = (digit_sum x') + (digit_sum y')
+    total <= 19
+
+let rec expand (x,y) (findings: (int*int)[]) =
+    printfn "%i" findings.Length
+    let candidates =
+        [|((x + 1), y); ((x - 1), y); (x, (y + 1)); (x, (y - 1))|]
+        |> Array.filter is_legal
+        |> Array.filter (fun elem -> not (Array.exists (fun e -> e = elem) findings))
+    match candidates.Length with
+    | 0 -> findings
+    | _ ->
+        let findings' = Array.append findings candidates
+        Array.fold (fun acc elem -> expand elem acc) findings' candidates
+
+
+
+//At a position:
+//1: find candidates
+//2: Check if they are legal
+//3: For all legal: Add to findings
+//4: For all legal: Expand using new list
+//5: Keep adding to findings
+
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
-    let v = digit_sum 123
-    let value = sprintf "%A" v
-    //TODO: Implement here
+    let v = expand (0,0) [||]
+    let value = sprintf "%A" v.Length
     stopWatch.Stop()
     {
         ExpectedValue=correct;
