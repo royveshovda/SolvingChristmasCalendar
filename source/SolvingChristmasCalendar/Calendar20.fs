@@ -10,9 +10,7 @@
 open Common
 
 let correct = "102485"
-let expectedRuntimeInMs = 220000L
-
-//VERY SLOW!!!!!
+let expectedRuntimeInMs = 1500L
 
 let digit_sum (n:int) =
     let s = string n
@@ -26,24 +24,23 @@ let is_legal ((x:int),(y:int)) =
     let total = (digit_sum x') + (digit_sum y')
     total <= 19
 
-let rec expand (expandList: (int*int) list) (findings: (int*int)[]) =
-    printfn "%i (%i)" findings.Length expandList.Length
-
+let rec expand (expandList: (int*int) list) (findings: System.Collections.Generic.HashSet<int*int>) =
     match expandList with
     | [] -> findings
     | (x,y)::tail ->        
         let candidates =
             [|((x + 1), y); ((x - 1), y); (x, (y + 1)); (x, (y - 1))|]
             |> Array.filter is_legal
-            |> Array.filter (fun elem -> not (Array.exists (fun e -> e = elem) findings))
-        let findings' = Array.append findings candidates
+            |> Array.filter (fun elem -> findings.Add(elem))
         let expandList' = tail @ (Array.toList candidates)
-        expand expandList' findings'
+        expand expandList' findings
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
-    let v = expand [(0,0)] [|(0,0)|]
-    let value = sprintf "%A" v.Length
+    let findings = new System.Collections.Generic.HashSet<int*int>();
+    findings.Add((0,0)) |> ignore
+    let v = expand [(0,0)] findings
+    let value = sprintf "%A" v.Count
     stopWatch.Stop()
     {
         ExpectedValue=correct;
