@@ -10,8 +10,8 @@
 
 open Common
 
-let correct = "N/A"
-let expectedRuntimeInMs = 0L
+let correct = "1,7,10,13,19,23,28,31,32,44,49"
+let expectedRuntimeInMs = 7L
 
 let digit_squared_sum n =
     let b = 10
@@ -22,21 +22,30 @@ let digit_squared_sum n =
         | _ -> acc
     loop 0 n
 
-let check_number (n:int) =
-    
-    true
+let check_number n =
+    let rec check_number_impl n checked_list =
+        let s = digit_squared_sum n
+        match s with
+        | 1 -> true
+        | _ ->
+            match (List.exists (fun elem -> elem = s) checked_list) with
+            | true -> false
+            | false -> check_number_impl s (s::checked_list)
+    check_number_impl n [n]
+
+let pretty_print list =
+    let s = list |> Array.fold (fun acc x -> acc + (sprintf "%i," x)) ""
+    (s.TrimEnd(' ').TrimEnd(','))
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let candidates = [|1 .. 50|]
 
-    let v1 = digit_squared_sum 97
+    let value =
+        candidates
+        |> Array.filter check_number
+        |> pretty_print
 
-    //let v1 = check_number 7
-
-    //let v2 = check_number 17
-
-    let value = sprintf "%A" v1
     stopWatch.Stop()
     {
         ExpectedValue=correct;
