@@ -55,4 +55,9 @@ let get_solution =
         match first with
         | [] -> "Not found"
         | (a,_)::_ -> sprintf "%i" a    
-    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }
+    {
+        ExpectedValue=correct;
+        ActualValue=value;
+        ExpectedRuntimeInMs=expectedRuntimeInMs;
+        ActualRuntimeInMs=stopWatch.ElapsedMilliseconds
+    }

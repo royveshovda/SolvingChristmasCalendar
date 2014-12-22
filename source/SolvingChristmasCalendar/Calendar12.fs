@@ -38,4 +38,9 @@ let get_solution =
     let numberOfFriday13 = countFriday13 start stop
     let value = sprintf "%i" numberOfFriday13
     stopWatch.Stop()
-    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }
+    {
+        ExpectedValue=correct;
+        ActualValue=value;
+        ExpectedRuntimeInMs=expectedRuntimeInMs;
+        ActualRuntimeInMs=stopWatch.ElapsedMilliseconds
+    }

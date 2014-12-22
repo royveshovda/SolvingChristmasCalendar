@@ -16,4 +16,9 @@ let get_solution =
     let number = [1..10000]|>List.find(fun n -> string(bigint 2**n).Contains "472047")
     let value = sprintf "%A" number
     stopWatch.Stop()
-    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }
+    {
+        ExpectedValue=correct;
+        ActualValue=value;
+        ExpectedRuntimeInMs=expectedRuntimeInMs;
+        ActualRuntimeInMs=stopWatch.ElapsedMilliseconds
+    }

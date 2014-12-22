@@ -42,4 +42,9 @@ let get_solution =
     let m = get_number_of_possibilities 1 9
     let value = sprintf "%A" m
     stopWatch.Stop()
-    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }
+    {
+        ExpectedValue=correct;
+        ActualValue=value;
+        ExpectedRuntimeInMs=expectedRuntimeInMs;
+        ActualRuntimeInMs=stopWatch.ElapsedMilliseconds
+    }

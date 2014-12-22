@@ -30,4 +30,9 @@ let get_solution =
     stopWatch.Stop()
 
     let value = sprintf "%i" numbers.Length
-    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }
+    {
+        ExpectedValue=correct;
+        ActualValue=value;
+        ExpectedRuntimeInMs=expectedRuntimeInMs;
+        ActualRuntimeInMs=stopWatch.ElapsedMilliseconds
+    }

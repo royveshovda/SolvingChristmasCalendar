@@ -50,4 +50,9 @@ let get_solution =
     stopWatch.Stop()
 
     let value = sprintf "%i%i%i%i%i%i%i%i%i" i1 i2 i3 i4 i5 i6 i7 i8 i9
-    { ExpectedValue=correct; ActualValue=value; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }
+    {
+        ExpectedValue=correct;
+        ActualValue=value;
+        ExpectedRuntimeInMs=expectedRuntimeInMs;
+        ActualRuntimeInMs=stopWatch.ElapsedMilliseconds
+    }

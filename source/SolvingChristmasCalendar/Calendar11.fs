@@ -51,4 +51,9 @@ let get_solution =
     stopWatch.Stop()
     
     let valueS = sprintf "%i" value
-    { ExpectedValue=correct; ActualValue=valueS; ExpectedRuntimeInMs=expectedRuntimeInMs; ActualRuntimeInMs=stopWatch.ElapsedMilliseconds }
+    {
+        ExpectedValue=correct;
+        ActualValue=valueS;
+        ExpectedRuntimeInMs=expectedRuntimeInMs;
+        ActualRuntimeInMs=stopWatch.ElapsedMilliseconds
+    }
