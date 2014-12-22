@@ -10,13 +10,16 @@
 open Common
 
 let correct = "102485"
-let expectedRuntimeInMs = 1500L
+let expectedRuntimeInMs = 1200L
 
 let digit_sum n =
-    let s = string n
-    s.ToCharArray()
-    |> Array.map (fun elem -> System.Int32.Parse(string elem))
-    |> Array.sum
+    let b = 10
+    let rec loop acc = function
+        | n when n > 0 ->
+            let m, r = System.Math.DivRem(n, b)
+            loop (acc + (r)) m
+        | _ -> acc
+    loop 0 n
 
 let is_legal ((x:int),(y:int)) =
     let x' = System.Math.Abs(x)
