@@ -39,10 +39,9 @@ let pretty_print list =
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
-    let candidates = [|1 .. 50|]
 
     let value =
-        candidates
+        [|1 .. 50|]
         |> Array.filter check_number
         |> pretty_print
 
