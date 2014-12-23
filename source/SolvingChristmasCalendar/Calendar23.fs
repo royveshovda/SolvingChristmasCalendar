@@ -10,7 +10,7 @@ open Common
 let correct = "9"
 let expectedRuntimeInMs = 3300L
 
-let get_parts (n: int) =
+let get_parts n =
     let get_digits n =
         let b = 10
         let rec loop acc = function
@@ -34,17 +34,17 @@ let get_parts (n: int) =
     |]
 
 let check_number n =
-    let parts = 
+    let parts =
         get_parts n
         |> Array.filter (fun (p1, p2) -> n = ((p1+p2) * (p1+p2)))
-    match parts.Length with
-    | 0 -> false
+    match parts with
+    | [||] -> false
     | _ -> true
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let values =
-        [|99 .. 999999|]
+        [|10 .. 999999|]
         |> Array.filter check_number
     let value = sprintf "%A" values.Length
 
