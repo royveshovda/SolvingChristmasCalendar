@@ -8,17 +8,29 @@
 open Common
 
 let correct = "9"
-let expectedRuntimeInMs = 3500L
+let expectedRuntimeInMs = 3300L
 
-//TODO: improve speed
 let get_parts (n: int) =
-    let text = string n
-    let stop = text.Length - 1
+    let get_digits n =
+        let b = 10
+        let rec loop acc = function
+            | n when n > 0 ->
+                let m, r = System.Math.DivRem(n, b)
+                loop (r::acc) m
+            | _ -> List.toArray acc
+        loop [] n
+
+    let assemble (digits: int[]) =
+        let limiter = digits.Length - 1
+        digits |> Array.mapi (fun i x -> x * (pown 10 (limiter - i))) |> Array.sum
+    
+    let digits = get_digits n
+    let length = digits.Length
     [|
-        for i in 1 .. stop do
-            let part1 = int (text.Substring(0,i))
-            let part2 = int (text.Substring(i))            
-            yield (part1, part2)
+        for i in 1 .. (length - 1) do
+            let part1 = Array.sub digits 0 i
+            let part2 = Array.sub digits i (length - i)
+            yield (assemble part1, assemble part2)
     |]
 
 let check_number n =
@@ -32,9 +44,10 @@ let check_number n =
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let values =
-        [|1 .. 999999|]
+        [|99 .. 999999|]
         |> Array.filter check_number
     let value = sprintf "%A" values.Length
+
     stopWatch.Stop()
     {
         ExpectedValue=correct;
