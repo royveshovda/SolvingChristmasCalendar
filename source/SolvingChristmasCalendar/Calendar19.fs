@@ -3,25 +3,7 @@
 //PROBLEM
 //Et palindrom er et ord som gir samme resultat enten det leses fra høyre eller venstre, for eksempel Lol.
 //Gitt denne stringen på litt over 1200 tegn (separert med linjeskift kun for syns skyld):
-//JegtroringenkanleveetheltlivutenkjærlighetMenkjærlighetenharmange
-//ansikterIhøstkomdetutenboksomheterErlikKjærlighetDenbeståravsamtaler
-//medselgereavgatemagasinetsomnåeretablertimangenorskebyerAlleharde
-//enhistorieåfortelleomkjærlighetsomnoeavgjørendeEntendetertilen
-//partneretfamiliemedlemenvennelleretkjæledyrMangeharopplevdåbli
-//sveketogselvåsvikteMenutrolignokblirikkekjærlighetsevnenødelagt
-//allikevelDenbyggesoppigjengangpågangKjærligheteneretstedåfeste
-//blikketDengirossretningognoeåstyreetterDengirossverdisommennesker
-//ognoeåleveforPåsammemåtesomkjærligheteneretfundamentimenneskelivet
-//erGrunnlovenetfundamentfornasjonenNorgeFor200årsidensamletengruppe
-//mennsegpåEidsvollforålagelovensomskullebligrunnlagettildetselvstendige
-//NorgeGrunnlovensomdengangblevedtattharutvikletsegipaktmedtidenog
-//sikreridagdetnorskefolkrettigheterviletttarforgittihverdagenRettighetersom
-//menneskerimangeandrelandbarekandrømmeomogsomdeslossformedlivet
-//sominnsatsJeghåperatvigjennomjubileumsfeiringeni2014vilbliminnetom
-//hvaGrunnlovenegentligbetyrforosssåvikanfortsetteåarbeideforverdiene
-//vårebådeherhjemmeoginternasjonaltJegharlysttilånevnenoeneksempler
-//påhvordanGrunnlovenvirkerinnpåenkeltmenneskerslivTenkdegatduskriver
-//etkritiskinnleggomlandetsstyrepåsosialemedier
+//........
 //Hva er det lengste substrengen du finner i denne strengen som er et palindrom? Svaret skal være palindromet. 
 
 open Common

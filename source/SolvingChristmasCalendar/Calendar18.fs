@@ -5,9 +5,6 @@
 //Din oppgave er å skrive et program som søker gjennom ordlista words.txt, for å finne den største samlingen med anagrammer - altså den største mengden ord som finnes i ordlista og som er anagrammer av hverandre. Svaret skal være bokstavene som utgjør den største samlingen anagrammer, sortert alfabetisk og i lower case.
 //Hvis vi går tilbake til eksemplene over, til ordlista med 5 ord, har vi 3 og 2 anagrammer. Her blir da 3 den største samlingen anagrammer. Svaret skal være bokstavene i anagrammene, sortert alfabetisk, som da ville vært aerrv.
 //“Samme ord” kan forekomme flere ganger i ordlista, men med forskjellig casing. Disse regnes fortsatt som anagrammer av hverandre. De er tross alt forskjellige ord som bygges opp av de samme bokstavene.
-//For sikkerhets skyld:
-//$ md5 words.txt
-//MD5 (words.txt) = 2cf1a35b9c05153d37a1ee7465893be3 
 
 open Common
 open System.IO
