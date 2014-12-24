@@ -25,8 +25,8 @@ let main argv =
 //    printf "Day 20:  "; printfn "%s" (formatResult Calendar20.get_solution)
 //    printf "Day 21:  "; printfn "%s" (formatResult Calendar21.get_solution)
 //    printf "Day 22:  "; printfn "%s" (formatResult Calendar22.get_solution)
-    printf "Day 23:  "; printfn "%s" (formatResult Calendar23.get_solution)
-//    printf "Day 24:  "; printfn "%s" (formatResult Calendar24.get_solution)
+//    printf "Day 23:  "; printfn "%s" (formatResult Calendar23.get_solution)
+    printf "Day 24:  "; printfn "%s" (formatResult Calendar24.get_solution)
 
     System.Console.ReadKey() |> ignore
     0 // return an integer exit code

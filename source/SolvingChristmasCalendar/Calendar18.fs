@@ -7,7 +7,6 @@
 //“Samme ord” kan forekomme flere ganger i ordlista, men med forskjellig casing. Disse regnes fortsatt som anagrammer av hverandre. De er tross alt forskjellige ord som bygges opp av de samme bokstavene.
 
 open Common
-open System.IO
 
 let correct = "agnor"
 let expectedRuntimeInMs = 2100L

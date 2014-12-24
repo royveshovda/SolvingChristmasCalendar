@@ -5,8 +5,6 @@
 //Hvor mange slike positive heltall under 1000000 (en million) finnes det? 
 //Julegavetips: Merk at 100 er også et slik tall, da (10 + 0)² = 10² = 100. 
 
-//#r "FSharp.Collections.ParallelSeq.dll"
-
 open Common
 open FSharp.Collections.ParallelSeq
 
