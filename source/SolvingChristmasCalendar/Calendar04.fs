@@ -7,9 +7,10 @@
 //Julegavetips: Det er i kolonnen med overskriften TAN dere finner den laveste målte temperaturen for et døgn.
 
 open Common
+open FSharp.Collections.ParallelSeq
 
 let correct = "14.12.1981"
-let expectedRuntimeInMs = 200L
+let expectedRuntimeInMs = 150L
 
 open System
 open System.IO
@@ -31,10 +32,10 @@ let readFile filename=
         text.Split ('\n')
         |> Seq.skip 24
         |> Seq.take 23377
-        |> Seq.map parseLine
-        |> Seq.filter (fun (date:DateTime, value) -> date.Month = 12)
-        |> Seq.sortBy (fun (_,temp) -> temp)
-        |> Seq.head
+        |> PSeq.map parseLine
+        |> PSeq.filter (fun (date:DateTime, value) -> date.Month = 12)
+        |> PSeq.sortBy (fun (_,temp) -> temp)
+        |> PSeq.head
 
     (date, temp)
 
