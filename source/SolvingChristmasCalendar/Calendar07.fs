@@ -5,9 +5,10 @@
 //Hvor mange piksler er det av den 10. (teller fra 1) mest brukte fargen (i RGB-verdi) i dette bildet?
 
 open Common
+open FSharp.Collections.ParallelSeq
 
 let correct = "22272"
-let expectedRuntimeInMs = 2800L
+let expectedRuntimeInMs = 1600L
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
@@ -27,9 +28,14 @@ let get_solution =
     done
 
     let values = list.ToArray()
-    let v2 = values |> Seq.countBy id |> Seq.toArray |> Array.sortBy (fun (p, n) -> (n * -1))
+    let v2 =
+        values
+        |> PSeq.countBy id
+        |> PSeq.toArray
+        |> PSeq.sortBy (fun (p, n) -> (n * -1))
+        |> PSeq.nth 9
 
-    let (_, number) = v2.[9]
+    let (_, number) = v2
     stopWatch.Stop()
     let value = sprintf "%i" number
     {
