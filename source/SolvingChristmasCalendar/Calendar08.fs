@@ -8,26 +8,28 @@
 //TIPS: Også kalt "Perfect number"
 
 open Common
+open FSharp.Collections.ParallelSeq
 
 let correct = "6,28,496,8128"
-let expectedRuntimeInMs = 4500L
+let expectedRuntimeInMs = 1250L
 
 let perf n =
     n = List.fold (+) 0 (List.filter (fun i -> n % i = 0) [1..(n-1)])
 
 let getAllPerfectNumberUnder n =
-    let l = [1 .. n]
-    l |> List.filter perf
+    {1 .. n}
+    |> PSeq.filter perf
+    |> PSeq.sort
 
 let prettyPrint list =
-    let s = list |> List.fold (fun acc x -> acc + (sprintf "%i," x)) ""
+    let s = list |> Seq.fold (fun acc x -> acc + (sprintf "%i," x)) ""
     (s.TrimEnd(' ').TrimEnd(','))
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let numbers = getAllPerfectNumberUnder 10000
-    stopWatch.Stop()
     let value = prettyPrint numbers    
+    stopWatch.Stop()
     {
         ExpectedValue=correct;
         ActualValue=value;
