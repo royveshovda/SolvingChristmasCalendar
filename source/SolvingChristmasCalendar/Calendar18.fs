@@ -7,9 +7,10 @@
 //“Samme ord” kan forekomme flere ganger i ordlista, men med forskjellig casing. Disse regnes fortsatt som anagrammer av hverandre. De er tross alt forskjellige ord som bygges opp av de samme bokstavene.
 
 open Common
+open FSharp.Collections.ParallelSeq
 
 let correct = "agnor"
-let expectedRuntimeInMs = 2100L
+let expectedRuntimeInMs = 950L
 
 let filename = "..\\..\\..\\Data\\words.txt"
 //let filename = "/Users/royveshovda/src/SolvingChristmasCalendar/source/Data/words.txt"
@@ -26,8 +27,8 @@ let get_solution =
 
     let value =
         words
-        |> Seq.groupBy (fun (_, x) -> x)
-        |> Seq.minBy (fun (_, ws) -> -(ws |> Seq.length))
+        |> PSeq.groupBy (fun (_, x) -> x)
+        |> PSeq.minBy (fun (_, ws) -> -(ws |> Seq.length))
         |> fst
         |> System.String.Concat
     stopWatch.Stop()
