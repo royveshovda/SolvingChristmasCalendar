@@ -14,33 +14,33 @@ open Common
 let correct = "153846"
 let expectedRuntimeInMs = 20L
 
-let get_digits n =
-    let b = 10
-    let rec loop acc = function
-        | n when n > 0 ->
-            let m, r = System.Math.DivRem(n, b)
-            loop (r::acc) m
-        | _ -> List.toArray acc
-    loop [] n
+let shift_number (n: int) : int =
+    let get_digits n =
+        let rec loop acc = function
+            | n when n > 0 ->
+                let m, r = System.Math.DivRem(n, 10)
+                loop (r::acc) m
+            | _ -> List.toArray acc
+        loop [] n
 
-let assemble (digits: int[]) =
-    let limiter = digits.Length - 1
-    digits |> Array.mapi (fun i x -> x * (pown 10 (limiter - i))) |> Array.sum
+    let assemble (digits: int[]) =
+        let limiter = digits.Length - 1
+        digits |> Array.mapi (fun i x -> x * (pown 10 (limiter - i))) |> Array.sum
 
-let shift_number (digits: int[]) =
+    let digits = get_digits n
     let l = digits.Length
-    let part2 = digits.[l - 1]
-    let part1 = Array.sub digits 0 (l - 1)
-    let new_number = Array.append [|part2|] part1
-    assemble new_number
+    let part2 = digits.[(l-1)..]
+    let part1 = digits.[.. (l-2)]
+    assemble (Array.append part2 part1)
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
-    let (n,_) =
+
+    let n =
         { 16 .. 10 .. 1000000 }
-        |> Seq.map (fun n -> (n, (get_digits n))) 
-        |> Seq.find (fun (n, arr) -> (shift_number arr) = (4 * n))
+        |> Seq.find (fun n -> (shift_number n) = (4 * n))
     let value = sprintf "%i" n
+
     stopWatch.Stop()
     {
         ExpectedValue=correct;
