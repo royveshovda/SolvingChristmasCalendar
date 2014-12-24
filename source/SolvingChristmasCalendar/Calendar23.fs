@@ -5,48 +5,27 @@
 //Hvor mange slike positive heltall under 1000000 (en million) finnes det? 
 //Julegavetips: Merk at 100 er også et slik tall, da (10 + 0)² = 10² = 100. 
 
+//#r "FSharp.Collections.ParallelSeq.dll"
+
 open Common
+open FSharp.Collections.ParallelSeq
 
 let correct = "9"
-let expectedRuntimeInMs = 3300L
+let expectedRuntimeInMs = 220L
 
-let get_parts n =
-    let get_digits n =
-        let b = 10
-        let rec loop acc = function
-            | n when n > 0 ->
-                let m, r = System.Math.DivRem(n, b)
-                loop (r::acc) m
-            | _ -> List.toArray acc
-        loop [] n
-
-    let assemble (digits: int[]) =
-        let limiter = digits.Length - 1
-        digits |> Array.mapi (fun i x -> x * (pown 10 (limiter - i))) |> Array.sum
-    
-    let digits = get_digits n
-    let length = digits.Length
-    [|
-        for i in 1 .. (length - 1) do
-            let part1 = Array.sub digits 0 i
-            let part2 = Array.sub digits i (length - i)
-            yield (assemble part1, assemble part2)
-    |]
-
-let check_number n =
-    let parts =
-        get_parts n
-        |> Array.filter (fun (p1, p2) -> n = ((p1+p2) * (p1+p2)))
-    match parts with
-    | [||] -> false
-    | _ -> true
+let check_number n=
+    let rec check_number_impl div =
+        match n/div, n%div with
+        | 0,_ -> false
+        | x,y -> (x+y)*(x+y) = n || check_number_impl (div*10)
+    check_number_impl 10
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let values =
-        [|10 .. 999999|]
-        |> Array.filter check_number
-    let value = sprintf "%A" values.Length
+        {10 .. 999999}
+        |> PSeq.filter check_number
+    let value = sprintf "%A" (PSeq.length values)
 
     stopWatch.Stop()
     {
