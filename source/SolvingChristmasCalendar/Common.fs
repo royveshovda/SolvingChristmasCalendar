@@ -7,7 +7,7 @@ let formatResult result =
         match result.ActualValue with
         | x when x = result.ExpectedValue -> sprintf "%s" result.ActualValue
         | _ -> sprintf "FAILED: A:%s (E:%s)" result.ActualValue result.ExpectedValue
-    sprintf "%-25s %5ims (%5ims)" res result.ActualRuntimeInMs result.ExpectedRuntimeInMs
+    sprintf "%-30s %5ims (%5ims)" res result.ActualRuntimeInMs result.ExpectedRuntimeInMs
 
 
 let get_primes limit =
