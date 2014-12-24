@@ -7,9 +7,10 @@
 //Eksempler på to slike palindrom-par er 1 (10) = 1 (8) og 1496941 (10) = 5553555 (8)
 
 open Common
+open FSharp.Collections.ParallelSeq
 
 let correct = "25"
-let expectedRuntimeInMs = 1000L
+let expectedRuntimeInMs = 250L
 
 let check10Palindrome i =
     let s = sprintf "%i" i
@@ -20,16 +21,17 @@ let check8Palindrome (i:int) =
     is_palindrome s
 
 let palindromesBelow i = 
-    let n = [1 .. i]
-    let numbers = n |> List.filter check10Palindrome |> List.filter check8Palindrome
-    numbers
+    { 1 .. i }
+    |> PSeq.filter check10Palindrome
+    |> PSeq.filter check8Palindrome
+    |> PSeq.length
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let numbers = palindromesBelow 1000000
     stopWatch.Stop()
 
-    let value = sprintf "%i" numbers.Length
+    let value = sprintf "%i" numbers
     {
         ExpectedValue=correct;
         ActualValue=value;
