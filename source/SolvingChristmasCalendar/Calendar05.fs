@@ -9,9 +9,10 @@
 //Julegavetips: Gitt definisjonen av STORETALL ender vi da opp med (9! =) 362880 forskjellige tall.
 
 open Common
+open FSharp.Collections.ParallelSeq
 
 let correct = "7"
-let expectedRuntimeInMs = 4000L
+let expectedRuntimeInMs = 750L
 
 let rec insert left x right = seq {
     match right with
@@ -47,10 +48,9 @@ let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
     let solution =
         (perms [1;2;3;4;5;6;7;8;9])
-        |> Seq.toList
-        |> List.map composeNumber
-        |> List.map findMaxPrimeFactor
-        |> List.min
+        |> PSeq.map composeNumber
+        |> PSeq.map findMaxPrimeFactor
+        |> PSeq.min
     stopWatch.Stop()
     let value = sprintf "%A" solution
     {
