@@ -12,33 +12,15 @@
 open Common
 
 let correct = "153846"
-let expectedRuntimeInMs = 20L
-
-let shift_number (n: int) : int =
-    let get_digits n =
-        let rec loop acc = function
-            | n when n > 0 ->
-                let m, r = System.Math.DivRem(n, 10)
-                loop (r::acc) m
-            | _ -> List.toArray acc
-        loop [] n
-
-    let assemble (digits: int[]) =
-        let limiter = digits.Length - 1
-        digits |> Array.mapi (fun i x -> x * (pown 10 (limiter - i))) |> Array.sum
-
-    let digits = get_digits n
-    let l = digits.Length
-    let part2 = digits.[(l-1)..]
-    let part1 = digits.[.. (l-2)]
-    assemble (Array.append part2 part1)
+let expectedRuntimeInMs = 10L
 
 let get_solution =
     let stopWatch = System.Diagnostics.Stopwatch.StartNew()
 
     let n =
         { 16 .. 10 .. 1000000 }
-        |> Seq.find (fun n -> (shift_number n) = (4 * n))
+        |> Seq.filter (fun n -> (n/10%10)=4)
+        |> Seq.find (fun n -> int (sprintf "6%i" (n/10)) = (4*n))
     let value = sprintf "%i" n
 
     stopWatch.Stop()
